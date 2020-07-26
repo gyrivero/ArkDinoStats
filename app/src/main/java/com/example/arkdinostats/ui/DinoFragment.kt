@@ -2,7 +2,6 @@ package com.example.arkdinostats.ui
 
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.widget.ActionBarContainer
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.appcompat.widget.SearchView
 import com.example.arkdinostats.model.Dino
 import com.example.arkdinostats.R
-import kotlinx.android.synthetic.main.fragment_item_list.*
 
 class DinoFragment : Fragment()  {
 
@@ -37,7 +35,7 @@ class DinoFragment : Fragment()  {
         dinoList = Dino.allDinos().sortedBy { dino -> dino.name }
 
         dinoAdapter =
-            DinoRecyclerViewAdapter(Dino.allDinos() as MutableList<Dino>)
+            DinoRecyclerViewAdapter(Dino.allDinos() as MutableList<Dino>,context)
 
         // Set the adapter
         if (view is RecyclerView) {

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.CalculatorFragment">
+
+    <TextView
+        android:id="@+id/pruebaTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/dinoIV"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_launcher_foreground"
+        app:layout_constraintEnd_toEndOf="@+id/pruebaTV"
+        app:layout_constraintStart_toStartOf="@+id/pruebaTV"
+        app:layout_constraintTop_toBottomOf="@+id/pruebaTV" />
+
+    <TextView
+        android:id="@+id/hpTV"
+        android:layout_width="75dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Health:"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dinoIV" />
+
+    <TextView
+        android:id="@+id/staminaTV"
+        android:layout_width="75dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Stamina:"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hpTV" />
+
+    <TextView
+        android:id="@+id/oxygenTV"
+        android:layout_width="75dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Oxygen:"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/staminaTV" />
+
+    <TextView
+        android:id="@+id/foodTV"
+        android:layout_width="75dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Food:"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/oxygenTV" />
+
+    <TextView
+        android:id="@+id/weightTV"
+        android:layout_width="75dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Weight:"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/foodTV" />
+
+    <TextView
+        android:id="@+id/damageTV"
+        android:layout_width="75dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Damage:"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weightTV" />
+
+    <TextView
+        android:id="@+id/speedTV"
+        android:layout_width="75dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Speed:"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/damageTV" />
+
+    <TextView
+        android:id="@+id/torpidityTV"
+        android:layout_width="75dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Torpidity:"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/speedTV" />
+
+    <EditText
+        android:id="@+id/hpNumberET"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:ems="10"
+        android:inputType="number"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/hpTV"
+        app:layout_constraintStart_toEndOf="@+id/hpTV" />
+
+    <EditText
+        android:id="@+id/staminaNumberET"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:ems="10"
+        android:inputType="number"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/staminaTV"
+        app:layout_constraintStart_toEndOf="@+id/staminaTV" />
+
+    <EditText
+        android:id="@+id/oxygenNumberET"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:ems="10"
+        android:inputType="number"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/oxygenTV"
+        app:layout_constraintStart_toEndOf="@+id/oxygenTV" />
+
+    <EditText
+        android:id="@+id/foodNumberET"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:ems="10"
+        android:inputType="number"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/foodTV"
+        app:layout_constraintStart_toEndOf="@+id/foodTV" />
+
+    <EditText
+        android:id="@+id/weightNumberET"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:ems="10"
+        android:inputType="number"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/weightTV"
+        app:layout_constraintStart_toEndOf="@+id/weightTV" />
+
+    <EditText
+        android:id="@+id/damageNumberET"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:ems="10"
+        android:inputType="number"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/damageTV"
+        app:layout_constraintStart_toEndOf="@+id/damageTV" />
+
+    <EditText
+        android:id="@+id/speedNumberET"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:ems="10"
+        android:inputType="number"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/speedTV"
+        app:layout_constraintStart_toEndOf="@+id/speedTV" />
+
+    <EditText
+        android:id="@+id/torpidityNumberET"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:ems="10"
+        android:inputType="number"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/torpidityTV"
+        app:layout_constraintStart_toEndOf="@+id/torpidityTV" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
