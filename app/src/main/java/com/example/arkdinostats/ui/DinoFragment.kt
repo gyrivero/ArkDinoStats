@@ -1,5 +1,6 @@
 package com.example.arkdinostats.ui
 
+import android.app.Application
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -14,7 +15,6 @@ class DinoFragment : Fragment()  {
 
     private var columnCount = 3
     private lateinit var dinoAdapter : DinoRecyclerViewAdapter
-    private var dinoList : List<Dino> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,11 +31,15 @@ class DinoFragment : Fragment()  {
         val view = inflater.inflate(R.layout.fragment_item_list, container, false)
         setHasOptionsMenu(true)
 
-
-        dinoList = Dino.allDinos().sortedBy { dino -> dino.name }
-
         dinoAdapter =
-            DinoRecyclerViewAdapter(Dino.allDinos() as MutableList<Dino>,context)
+            DinoRecyclerViewAdapter(Dino.allDinos().sortedBy { dino -> dino.name  } as MutableList<Dino>,context)
+
+        val displayMetrics = context!!.resources.displayMetrics
+        val dpWidth : Float = displayMetrics.widthPixels / displayMetrics.density
+        columnCount = (dpWidth/200).toInt()
+        if (columnCount == 1) {
+            columnCount = 2
+        }
 
         // Set the adapter
         if (view is RecyclerView) {

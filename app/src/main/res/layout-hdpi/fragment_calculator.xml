@@ -8,7 +8,7 @@
     tools:context=".ui.CalculatorFragment">
 
     <TextView
-        android:id="@+id/pruebaTV"
+        android:id="@+id/nameTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -23,9 +23,9 @@
         android:layout_height="200dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/ic_launcher_foreground"
-        app:layout_constraintEnd_toEndOf="@+id/pruebaTV"
-        app:layout_constraintStart_toStartOf="@+id/pruebaTV"
-        app:layout_constraintTop_toBottomOf="@+id/pruebaTV" />
+        app:layout_constraintEnd_toEndOf="@+id/nameTV"
+        app:layout_constraintStart_toStartOf="@+id/nameTV"
+        app:layout_constraintTop_toBottomOf="@+id/nameTV" />
 
     <TextView
         android:id="@+id/hpTV"

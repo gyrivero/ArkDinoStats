@@ -2,4 +2,17 @@
     <string name="app_name">ArkDinoStats</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="health">Health:</string>
+    <string name="stamina">Stamina:</string>
+    <string name="oxygen">Oxygen:</string>
+    <string name="food">Food:</string>
+    <string name="weight">Weight:</string>
+    <string name="damage">Damage:</string>
+    <string name="speed">Speed:</string>
+    <string name="torpidity">Torpidity:</string>
+    <string name="level">Level</string>
+    <string name="wild">Wild</string>
+    <string name="tamed">Tamed</string>
+    <string name="breeded">Breeded</string>
+    <string name="effect">Effect</string>
 </resources>

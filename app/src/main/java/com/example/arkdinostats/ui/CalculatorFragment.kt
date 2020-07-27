@@ -1,7 +1,6 @@
 package com.example.arkdinostats.ui
 
 import android.os.Bundle
-import android.util.DisplayMetrics
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,9 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.arkdinostats.R
 import com.example.arkdinostats.model.Dino
-import kotlinx.android.synthetic.main.fragment_calculator.*
 import kotlinx.android.synthetic.main.fragment_calculator.view.*
-import kotlin.math.roundToInt
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -48,7 +45,7 @@ class CalculatorFragment : Fragment() {
         val dinoList : List<Dino> = ArrayList<Dino>(Dino.allDinos())
         for (dino in dinoList) {
             if (dino.name.equals(param1)) {
-                view.pruebaTV.text = dino.name
+                view.nameTV.text = dino.name
                 view.dinoIV.setImageResource(dino.image)
                 break
             }
