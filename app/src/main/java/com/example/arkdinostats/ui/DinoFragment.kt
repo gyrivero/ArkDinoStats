@@ -31,8 +31,10 @@ class DinoFragment : Fragment()  {
         val view = inflater.inflate(R.layout.fragment_item_list, container, false)
         setHasOptionsMenu(true)
 
+        val dinoList = Dino.allDinos()
+
         dinoAdapter =
-            DinoRecyclerViewAdapter(Dino.allDinos().sortedBy { dino -> dino.name  } as MutableList<Dino>,context)
+            DinoRecyclerViewAdapter(dinoList as MutableList<Dino>,context)
 
         val displayMetrics = context!!.resources.displayMetrics
         val dpWidth : Float = displayMetrics.widthPixels / displayMetrics.density
@@ -52,6 +54,10 @@ class DinoFragment : Fragment()  {
             }
         }
         return view
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu, menu)
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {

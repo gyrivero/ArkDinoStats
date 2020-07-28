@@ -1,13 +1,17 @@
 package com.example.arkdinostats.ui
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
+import androidx.core.widget.doOnTextChanged
 import com.example.arkdinostats.R
 import com.example.arkdinostats.model.Dino
+import kotlinx.android.synthetic.main.fragment_calculator.*
 import kotlinx.android.synthetic.main.fragment_calculator.view.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -19,6 +23,7 @@ class CalculatorFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    var average : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,13 +40,18 @@ class CalculatorFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_calculator, container, false)
 
-        val displayMetrics = context!!.resources.displayMetrics
-        val dpi = displayMetrics.densityDpi
-        val density = displayMetrics.density
-        val scaledDensity = displayMetrics.scaledDensity
-        val widthDpi = displayMetrics.widthPixels / density
+        view.checkBtn.setOnClickListener(View.OnClickListener {
+            if (!view.lvlET.text.isNullOrEmpty()){
+                average = view.lvlET.text.toString().toInt()
+                average = (average-1)/7
+                view.averageTV.setText("Average: $average")
+                checkStats()
+            }
+            else {
+                lvlET.setError("Please indicate the level")
+            }
+        })
 
-        Toast.makeText(activity, "dpi: $dpi / density: $density / scaledDensity: $scaledDensity / widthDpi: $widthDpi", Toast.LENGTH_SHORT).show()
         val dinoList : List<Dino> = ArrayList<Dino>(Dino.allDinos())
         for (dino in dinoList) {
             if (dino.name.equals(param1)) {
@@ -51,6 +61,30 @@ class CalculatorFragment : Fragment() {
             }
         }
         return view
+    }
+
+    private fun checkStats() {
+        if (!hpNumberET.text.isNullOrEmpty()) {
+            var hp = hpNumberET.text.toString().toFloat()
+            if (hp>100.0F) {
+                view!!.hpPoints.setText("1")
+                view!!.hpPoints.setBackgroundColor(resources.getColor(R.color.colorAccent,null))
+            } else if (hp<100.0F) {
+                view!!.hpPoints.setText("3")
+                view!!.hpPoints.setBackgroundColor(resources.getColor(R.color.colorPrimaryDark,null))
+            } else {
+                view!!.hpPoints.setText("2")
+                view!!.hpPoints.setBackgroundColor(resources.getColor(R.color.colorPrimary,null))
+            }
+        }
+        else {
+            hpNumberET.setError("Please indicate the Health Points")
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.close()
     }
 
     companion object {

@@ -218,7 +218,7 @@
 
         <TextView
             android:id="@+id/hpPoints"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/hpNumberET"
@@ -226,7 +226,7 @@
 
         <TextView
             android:id="@+id/staminaPoints"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/staminaNumberET"
@@ -234,7 +234,7 @@
 
         <TextView
             android:id="@+id/oxygenPoints"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/oxygenNumberET"
@@ -242,7 +242,7 @@
 
         <TextView
             android:id="@+id/foodPoints"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/foodNumberET"
@@ -250,7 +250,7 @@
 
         <TextView
             android:id="@+id/weigthPoints"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/weightNumberET"
@@ -258,7 +258,7 @@
 
         <TextView
             android:id="@+id/damagePoints"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/damageNumberET"
@@ -266,7 +266,7 @@
 
         <TextView
             android:id="@+id/speedPoints"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/speedNumberET"
@@ -281,6 +281,7 @@
             android:hint="@string/level"
             android:inputType="number"
             android:maxLength="4"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/hpNumberET"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -337,7 +338,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.48" />
+            app:layout_constraintGuide_percent="0.44" />
 
         <TextView
             android:id="@+id/averageTV"
@@ -354,6 +355,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:textSize="14sp"
             android:text="@string/checkBtn"
             app:layout_constraintStart_toStartOf="@+id/averageTV"
             app:layout_constraintTop_toBottomOf="@+id/averageTV" />

@@ -15,4 +15,6 @@
     <string name="tamed">Tamed</string>
     <string name="breeded">Breeded</string>
     <string name="effect">Effect</string>
+    <string name="average_0">Average: 0</string>
+    <string name="checkBtn">Check</string>
 </resources>

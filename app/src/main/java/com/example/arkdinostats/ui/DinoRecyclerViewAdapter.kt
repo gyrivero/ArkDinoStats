@@ -1,6 +1,7 @@
 package com.example.arkdinostats.ui
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.DisplayMetrics
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +13,7 @@ import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
@@ -27,6 +29,7 @@ class DinoRecyclerViewAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.fragment_item, parent, false)
+
         return ViewHolder(view)
     }
 
@@ -34,7 +37,6 @@ class DinoRecyclerViewAdapter(
         val item = values[position]
         holder.dinoNameTV.text = item.name
         holder.dinoIV.setImageResource(item.image)
-
 
         holder.dinoIV.setOnClickListener(View.OnClickListener { it ->
             val dinoName = item.name

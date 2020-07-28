@@ -18,6 +18,7 @@ class Dino(val name: String, val image: Int) {
             list.add(Dino("Stegosaurus",R.drawable.ic_stego))
             list.add(Dino("T-Rex",R.drawable.ic_trex))
             list.add(Dino("Triceratops",R.drawable.ic_triceratops))
+            list.sortBy { dino -> dino.name  }
             return list
         }
     }
