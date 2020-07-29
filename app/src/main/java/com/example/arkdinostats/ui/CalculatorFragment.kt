@@ -11,8 +11,10 @@ import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doOnTextChanged
 import com.example.arkdinostats.R
 import com.example.arkdinostats.model.Dino
+import com.example.arkdinostats.model.Json4Kotlin_Base
 import kotlinx.android.synthetic.main.fragment_calculator.*
 import kotlinx.android.synthetic.main.fragment_calculator.view.*
+import kotlinx.android.synthetic.main.fragment_item_list.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -39,6 +41,10 @@ class CalculatorFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_calculator, container, false)
+
+        var list : List<Json4Kotlin_Base> = Dino.jsonparse()
+        var dino = Dino(list[0].name,1)
+        Toast.makeText(activity, list.size.toString(), Toast.LENGTH_SHORT).show()
 
         view.checkBtn.setOnClickListener(View.OnClickListener {
             if (!view.lvlET.text.isNullOrEmpty()){

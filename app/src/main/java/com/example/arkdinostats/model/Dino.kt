@@ -1,11 +1,23 @@
 package com.example.arkdinostats.model
 
+import com.example.arkdinostats.MyApp
 import com.example.arkdinostats.R
+import com.example.arkdinostats.Utils
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
-class Dino(val name: String, val image: Int) {
+class Dino(val name: String, var image: Int) {
 
 
     companion object {
+
+        fun jsonparse(): List<Json4Kotlin_Base> {
+            val gson = Gson()
+            val fileJson = Utils.getJsonDataFromAsset(MyApp.instance,"values.json")
+            val listJson = object : TypeToken<List<Json4Kotlin_Base>>(){}.type
+            var listDinos : List<Json4Kotlin_Base> = gson.fromJson(fileJson,listJson)
+            return listDinos
+        }
 
         fun allDinos() : List<Dino> {
             val list : MutableList<Dino> = mutableListOf()
