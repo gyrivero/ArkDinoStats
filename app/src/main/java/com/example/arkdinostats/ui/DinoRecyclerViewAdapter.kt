@@ -47,6 +47,7 @@ class DinoRecyclerViewAdapter(
             fragment.arguments = bundle
             fragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer,fragment)
+                .addToBackStack(null)
                 .commit()
 
         })

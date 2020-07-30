@@ -1,6 +1,5 @@
 package com.example.arkdinostats.ui
 
-import android.app.Application
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -10,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.appcompat.widget.SearchView
 import com.example.arkdinostats.model.Dino
 import com.example.arkdinostats.R
+import com.example.arkdinostats.Utils
 
 class DinoFragment : Fragment()  {
 
@@ -31,7 +31,7 @@ class DinoFragment : Fragment()  {
         val view = inflater.inflate(R.layout.fragment_item_list, container, false)
         setHasOptionsMenu(true)
 
-        val dinoList = Dino.allDinos()
+        val dinoList = Dino.createDinos(Utils.jsonParse("values.json"))
 
         dinoAdapter =
             DinoRecyclerViewAdapter(dinoList as MutableList<Dino>,context)

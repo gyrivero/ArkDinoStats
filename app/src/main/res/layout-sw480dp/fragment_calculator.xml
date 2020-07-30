@@ -223,7 +223,8 @@
             android:layout_marginStart="8dp"
             android:textSize="19sp"
             app:layout_constraintBottom_toBottomOf="@+id/hpNumberET"
-            app:layout_constraintStart_toEndOf="@+id/hpNumberET" />
+            app:layout_constraintStart_toEndOf="@+id/hpNumberET"
+            app:layout_constraintTop_toTopOf="@+id/hpNumberET" />
 
         <TextView
             android:id="@+id/staminaPoints"
@@ -232,7 +233,8 @@
             android:layout_marginStart="8dp"
             android:textSize="19sp"
             app:layout_constraintBottom_toBottomOf="@+id/staminaNumberET"
-            app:layout_constraintStart_toEndOf="@+id/staminaNumberET" />
+            app:layout_constraintStart_toEndOf="@+id/staminaNumberET"
+            app:layout_constraintTop_toTopOf="@+id/staminaNumberET" />
 
         <TextView
             android:id="@+id/oxygenPoints"
@@ -241,7 +243,8 @@
             android:layout_marginStart="8dp"
             android:textSize="19sp"
             app:layout_constraintBottom_toBottomOf="@+id/oxygenNumberET"
-            app:layout_constraintStart_toEndOf="@+id/oxygenNumberET" />
+            app:layout_constraintStart_toEndOf="@+id/oxygenNumberET"
+            app:layout_constraintTop_toTopOf="@+id/oxygenNumberET" />
 
         <TextView
             android:id="@+id/foodPoints"
@@ -250,7 +253,8 @@
             android:layout_marginStart="8dp"
             android:textSize="19sp"
             app:layout_constraintBottom_toBottomOf="@+id/foodNumberET"
-            app:layout_constraintStart_toEndOf="@+id/foodNumberET" />
+            app:layout_constraintStart_toEndOf="@+id/foodNumberET"
+            app:layout_constraintTop_toTopOf="@+id/foodNumberET" />
 
         <TextView
             android:id="@+id/weigthPoints"
@@ -259,7 +263,8 @@
             android:layout_marginStart="8dp"
             android:textSize="19sp"
             app:layout_constraintBottom_toBottomOf="@+id/weightNumberET"
-            app:layout_constraintStart_toEndOf="@+id/weightNumberET" />
+            app:layout_constraintStart_toEndOf="@+id/weightNumberET"
+            app:layout_constraintTop_toTopOf="@+id/weightNumberET" />
 
         <TextView
             android:id="@+id/damagePoints"
@@ -268,7 +273,8 @@
             android:layout_marginStart="8dp"
             android:textSize="19sp"
             app:layout_constraintBottom_toBottomOf="@+id/damageNumberET"
-            app:layout_constraintStart_toEndOf="@+id/damageNumberET" />
+            app:layout_constraintStart_toEndOf="@+id/damageNumberET"
+            app:layout_constraintTop_toTopOf="@+id/damageNumberET" />
 
         <TextView
             android:id="@+id/speedPoints"
@@ -277,13 +283,14 @@
             android:layout_marginStart="8dp"
             android:textSize="19sp"
             app:layout_constraintBottom_toBottomOf="@+id/speedNumberET"
-            app:layout_constraintStart_toEndOf="@+id/speedNumberET" />
+            app:layout_constraintStart_toEndOf="@+id/speedNumberET"
+            app:layout_constraintTop_toTopOf="@+id/speedNumberET" />
 
         <EditText
             android:id="@+id/lvlET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="32dp"
             android:ems="4"
             android:hint="@string/level"
             android:inputType="number"
@@ -297,7 +304,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="42dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lvlET">
 
@@ -329,11 +336,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:ems="3"
+            android:ems="6"
             android:hint="@string/effect"
-            android:inputType="number"
-            android:maxLength="4"
-            android:textSize="24sp"
+            android:inputType="numberDecimal"
+            android:maxLength="5"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/statusRG"
             app:layout_constraintTop_toBottomOf="@+id/statusRG" />
 
@@ -358,8 +365,8 @@
             android:layout_marginTop="16dp"
             android:text="@string/average_0"
             android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="@+id/effectET"
-            app:layout_constraintTop_toBottomOf="@+id/effectET" />
+            app:layout_constraintStart_toStartOf="@+id/imprintET"
+            app:layout_constraintTop_toBottomOf="@+id/imprintET" />
 
         <Button
             android:id="@+id/checkBtn"
@@ -370,6 +377,19 @@
             android:textSize="19sp"
             app:layout_constraintStart_toStartOf="@+id/averageTV"
             app:layout_constraintTop_toBottomOf="@+id/averageTV" />
+
+        <EditText
+            android:id="@+id/imprintET"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="4"
+            android:hint="@string/imprint"
+            android:inputType="numberDecimal"
+            android:maxLength="5"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/effectET"
+            app:layout_constraintTop_toBottomOf="@+id/effectET" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -1,20 +1,15 @@
 package com.example.arkdinostats.ui
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.*
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import android.widget.EditText
-import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
-import androidx.core.widget.doOnTextChanged
 import com.example.arkdinostats.R
+import com.example.arkdinostats.Utils
 import com.example.arkdinostats.model.Dino
-import com.example.arkdinostats.model.Json4Kotlin_Base
+import com.example.arkdinostats.model.JsonDino
 import kotlinx.android.synthetic.main.fragment_calculator.*
 import kotlinx.android.synthetic.main.fragment_calculator.view.*
-import kotlinx.android.synthetic.main.fragment_item_list.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -42,27 +37,63 @@ class CalculatorFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_calculator, container, false)
 
-        var list : List<Json4Kotlin_Base> = Dino.jsonparse()
-        var dino = Dino(list[0].name,1)
-        Toast.makeText(activity, list.size.toString(), Toast.LENGTH_SHORT).show()
+        view.effectET.visibility=View.GONE
+        view.imprintET.visibility=View.GONE
+        var statusIsSelected = false
+
+        view.statusRG.setOnCheckedChangeListener { group, checkedId ->
+            when(checkedId) {
+                R.id.wildRB -> {
+                    view.effectET.visibility=View.GONE
+                    view.imprintET.visibility=View.GONE
+                    view.effectET.setText("")
+                    statusIsSelected = true
+                }
+                R.id.breededRB -> {
+                    view.effectET.visibility=View.GONE
+                    view.imprintET.visibility=View.VISIBLE
+                    view.effectET.setText("")
+                    statusIsSelected = true
+                }
+                R.id.tamedRB -> {
+                    view.effectET.visibility=View.VISIBLE
+                    view.imprintET.visibility=View.GONE
+                    view.imprintET.setText("")
+                    statusIsSelected = true
+                }
+            }
+        }
 
         view.checkBtn.setOnClickListener(View.OnClickListener {
-            if (!view.lvlET.text.isNullOrEmpty()){
+            if (view.lvlET.text.isNullOrEmpty()) {
+                lvlET.setError("Please indicate the level")
+            } else if (!statusIsSelected) {
+                lvlET.setError("Please indicate status")
+            } else if (view.imprintET.visibility == View.VISIBLE && view.imprintET.text.isNullOrEmpty()) {
+                imprintET.setError("Please indicate imprint percentage")
+            } else if (view.effectET.visibility == View.VISIBLE && view.effectET.text.isNullOrEmpty()) {
+                effectET.setError("Please indicate taming effectivenes percentage")
+            } else {
                 average = view.lvlET.text.toString().toInt()
                 average = (average-1)/7
                 view.averageTV.setText("Average: $average")
                 checkStats()
             }
-            else {
-                lvlET.setError("Please indicate the level")
-            }
         })
 
-        val dinoList : List<Dino> = ArrayList<Dino>(Dino.allDinos())
+        val dinoList : List<Dino> = ArrayList<Dino>(Dino.createDinos(Utils.jsonParse("values.json")))
         for (dino in dinoList) {
             if (dino.name.equals(param1)) {
                 view.nameTV.text = dino.name
                 view.dinoIV.setImageResource(dino.image)
+                view.hpNumberET.setText(dino.baseHP.toString())
+                view.staminaNumberET.setText(dino.baseStamina.toString())
+                view.damageNumberET.setText(dino.baseDamage.toString())
+                view.foodNumberET.setText(dino.baseFood.toString())
+                view.oxygenNumberET.setText(dino.baseOxygen.toString())
+                view.speedNumberET.setText(dino.baseSpeed.toString())
+                view.torpidityNumberET.setText(dino.baseTorpidity.toString())
+                view.weightNumberET.setText(dino.baseWeight.toString())
                 break
             }
         }
@@ -70,7 +101,23 @@ class CalculatorFragment : Fragment() {
     }
 
     private fun checkStats() {
-        if (!hpNumberET.text.isNullOrEmpty()) {
+        if (hpNumberET.text.isNullOrEmpty()) {
+            hpNumberET.setError("Please indicate the Health Points")
+        } else if (staminaNumberET.text.isNullOrEmpty()) {
+            staminaNumberET.setError("Please indicate the Stamina Points")
+        } else if (oxygenNumberET.text.isNullOrEmpty()) {
+            oxygenNumberET.setError("Please indicate the Oxygen Points")
+        } else if (foodNumberET.text.isNullOrEmpty()) {
+            foodNumberET.setError("Please indicate the Food Points")
+        } else if (weightNumberET.text.isNullOrEmpty()) {
+            weightNumberET.setError("Please indicate the Weight Points")
+        } else if (damageNumberET.text.isNullOrEmpty()) {
+            damageNumberET.setError("Please indicate the Damage Points")
+        } else if (speedNumberET.text.isNullOrEmpty()) {
+            speedNumberET.setError("Please indicate the Speed Points")
+        } else if (torpidityNumberET.text.isNullOrEmpty()) {
+            torpidityNumberET.setError("Please indicate the Torpidity Points")
+        } else {
             var hp = hpNumberET.text.toString().toFloat()
             if (hp>100.0F) {
                 view!!.hpPoints.setText("1")
@@ -82,9 +129,6 @@ class CalculatorFragment : Fragment() {
                 view!!.hpPoints.setText("2")
                 view!!.hpPoints.setBackgroundColor(resources.getColor(R.color.colorPrimary,null))
             }
-        }
-        else {
-            hpNumberET.setError("Please indicate the Health Points")
         }
     }
 

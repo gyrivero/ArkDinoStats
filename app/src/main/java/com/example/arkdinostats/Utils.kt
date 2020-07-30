@@ -1,6 +1,9 @@
 package com.example.arkdinostats
 
 import android.content.Context
+import com.example.arkdinostats.model.JsonDino
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import java.io.IOException
 import java.io.InputStream
 
@@ -14,5 +17,13 @@ object Utils {
             return null
         }
         return jsonString
+    }
+
+    fun jsonParse(fileName : String): List<JsonDino> {
+        val gson = Gson()
+        val fileJson = Utils.getJsonDataFromAsset(MyApp.instance, fileName)
+        val listJson = object : TypeToken<List<JsonDino>>() {}.type
+        var listDinos: List<JsonDino> = gson.fromJson(fileJson, listJson)
+        return listDinos
     }
 }
