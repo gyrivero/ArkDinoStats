@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ArkDinoStats</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="health">Vida:</string>
+    <string name="stamina">Energia:</string>
+    <string name="oxygen">Oxigeno:</string>
+    <string name="food">Comida:</string>
+    <string name="weight">Peso:</string>
+    <string name="damage">Daño:</string>
+    <string name="speed">Velocidad:</string>
+    <string name="torpidity">Inconsciencia:</string>
+    <string name="level">Nivel</string>
+    <string name="wild">Salvaje</string>
+    <string name="tamed">Domado</string>
+    <string name="breeded">Criado</string>
+    <string name="effect">Efectividad</string>
+    <string name="average_0">Promedio: 0</string>
+    <string name="checkBtn">Chequear</string>
+    <string name="imprint">Imprint %</string>
+</resources>

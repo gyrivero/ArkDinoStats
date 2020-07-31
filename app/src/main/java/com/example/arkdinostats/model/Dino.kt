@@ -16,7 +16,33 @@ class Dino(
     var baseWeight: Float,
     var baseDamage: Float,
     var baseSpeed: Float,
-    var baseTorpidity: Float
+    var baseTorpidity: Float,
+    var iwHP: Float,
+    var iwStamina: Float,
+    var iwOxygen: Float,
+    var iwFood: Float,
+    var iwWeight: Float,
+    var iwDamage: Float,
+    var iwSpeed: Float,
+    var iwTorpidity: Float,
+    var taHP: Float,
+    var taStamina: Float,
+    var taOxygen: Float,
+    var taFood: Float,
+    var taWeight: Float,
+    var taDamage: Float,
+    var taSpeed: Float,
+    var taTorpidity: Float,
+    var tmHP: Float,
+    var tmStamina: Float,
+    var tmOxygen: Float,
+    var tmFood: Float,
+    var tmWeight: Float,
+    var tmDamage: Float,
+    var tmSpeed: Float,
+    var tmTorpidity: Float,
+    var tbhm: Float
+
 ) {
 
     companion object {
@@ -26,6 +52,7 @@ class Dino(
             val list: MutableList<Dino> = mutableListOf()
             val flashList: MutableList<String> = mutableListOf()
             for (JsonDino in jsonDinos) {
+                Log.i("Checkf","Name: ${JsonDino.name}. TBHM: ${JsonDino.tamedBaseHealthMultiplier}")
                 doLog(JsonDino)
                 try {
                     Log.i("Util", "${JsonDino.breeding.incubationTime}")
@@ -42,21 +69,19 @@ class Dino(
                     var dinoImage = putImage(JsonDino.name)
                     if (!isRepeated(jsonName, list)) {
                         list.add(
-                            Dino(
-                                jsonName,
-                                image = dinoImage,
-                                baseHP = JsonDino.fullStatsRaw[0][0]
-                                ,
-                                baseStamina = JsonDino.fullStatsRaw[1][0]
-                                ,
-                                baseTorpidity = JsonDino.fullStatsRaw[2][0],
-                                baseOxygen = JsonDino.fullStatsRaw[3][0]
-                                ,
-                                baseFood = JsonDino.fullStatsRaw[4][0],
-                                baseWeight = JsonDino.fullStatsRaw[7][0]
-                                ,
-                                baseDamage = JsonDino.fullStatsRaw[8][0] * 100,
-                                baseSpeed = JsonDino.fullStatsRaw[9][0] * 100
+                            Dino(jsonName, dinoImage, JsonDino.fullStatsRaw[0][0], JsonDino.fullStatsRaw[1][0],
+                                JsonDino.fullStatsRaw[3][0], JsonDino.fullStatsRaw[4][0],
+                                JsonDino.fullStatsRaw[7][0], JsonDino.fullStatsRaw[8][0] * 100,
+                                JsonDino.fullStatsRaw[9][0] * 100, JsonDino.fullStatsRaw[2][0],
+                                JsonDino.fullStatsRaw[0][1],JsonDino.fullStatsRaw[1][1],JsonDino.fullStatsRaw[3][1],
+                                JsonDino.fullStatsRaw[4][1],JsonDino.fullStatsRaw[7][1],JsonDino.fullStatsRaw[8][1],
+                                JsonDino.fullStatsRaw[9][1],JsonDino.fullStatsRaw[2][1],JsonDino.fullStatsRaw[0][3],
+                                JsonDino.fullStatsRaw[1][3],JsonDino.fullStatsRaw[3][3],JsonDino.fullStatsRaw[4][3],
+                                JsonDino.fullStatsRaw[7][3],JsonDino.fullStatsRaw[8][3],JsonDino.fullStatsRaw[9][3],
+                                JsonDino.fullStatsRaw[2][3],JsonDino.fullStatsRaw[0][4],JsonDino.fullStatsRaw[1][4],
+                                JsonDino.fullStatsRaw[3][4],JsonDino.fullStatsRaw[4][4],JsonDino.fullStatsRaw[7][4],
+                                JsonDino.fullStatsRaw[8][4],JsonDino.fullStatsRaw[9][4],JsonDino.fullStatsRaw[2][4],
+                                JsonDino.tamedBaseHealthMultiplier
                             )
                         )
                     } else {
@@ -99,7 +124,7 @@ class Dino(
 
         private fun doLog(jsonDino: JsonDino) {
             try {
-                Log.i("Util", "${jsonDino.breeding.incubationTime}")
+                Log.i("Util", "${jsonDino.displayedStats}")
             } catch (ex: NullPointerException) {
                 if (jsonDino.taming.nonViolent == false && jsonDino.taming.violent == false) {
                 }

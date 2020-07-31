@@ -11,17 +11,18 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 package com.example.arkdinostats.model
 
 import Breeding
+import com.google.gson.annotations.SerializedName
 
 data class JsonDino (
-	val name : String,
-	val blueprintPath : String,
-	val variants : List<String>,
-	val fullStatsRaw : List<List<Float>>,
-	val immobilizedBy : List<String>,
-	val taming : Taming,
-	val breeding : Breeding,
-	val tamedBaseHealthMultiplier : Int,
-	val noImprintingForSpeed : Boolean,
-	val doesNotUseOxygen : Boolean,
-	val displayedStats : Int
+	@SerializedName("name") val name : String,
+	@SerializedName("blueprintPath") val blueprintPath : String,
+	@SerializedName("variants") val variants : List<String>,
+	@SerializedName("fullStatsRaw") val fullStatsRaw : List<List<Float>>,
+	@SerializedName("immobilizedBy") val immobilizedBy : List<String>,
+	@SerializedName("breeding") val breeding : Breeding,
+	@SerializedName("taming") val taming : Taming,
+	@SerializedName("TamedBaseHealthMultiplier") val tamedBaseHealthMultiplier : Float,
+	@SerializedName("noImprintingForSpeed") val noImprintingForSpeed : Boolean,
+	@SerializedName("doesNotUseOxygen") val doesNotUseOxygen : Boolean,
+	@SerializedName("displayedStats") val displayedStats : Int
 )

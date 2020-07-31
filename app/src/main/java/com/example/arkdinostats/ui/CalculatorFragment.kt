@@ -1,13 +1,13 @@
 package com.example.arkdinostats.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
-import androidx.core.view.isVisible
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.arkdinostats.R
 import com.example.arkdinostats.Utils
 import com.example.arkdinostats.model.Dino
-import com.example.arkdinostats.model.JsonDino
 import kotlinx.android.synthetic.main.fragment_calculator.*
 import kotlinx.android.synthetic.main.fragment_calculator.view.*
 
@@ -21,6 +21,7 @@ class CalculatorFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     var average : Int = 0
+    lateinit var actualDino : Dino
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,6 +95,7 @@ class CalculatorFragment : Fragment() {
                 view.speedNumberET.setText(dino.baseSpeed.toString())
                 view.torpidityNumberET.setText(dino.baseTorpidity.toString())
                 view.weightNumberET.setText(dino.baseWeight.toString())
+                actualDino = dino
                 break
             }
         }
@@ -118,18 +120,174 @@ class CalculatorFragment : Fragment() {
         } else if (torpidityNumberET.text.isNullOrEmpty()) {
             torpidityNumberET.setError("Please indicate the Torpidity Points")
         } else {
-            var hp = hpNumberET.text.toString().toFloat()
-            if (hp>100.0F) {
-                view!!.hpPoints.setText("1")
-                view!!.hpPoints.setBackgroundColor(resources.getColor(R.color.colorAccent,null))
-            } else if (hp<100.0F) {
-                view!!.hpPoints.setText("3")
-                view!!.hpPoints.setBackgroundColor(resources.getColor(R.color.colorPrimaryDark,null))
-            } else {
-                view!!.hpPoints.setText("2")
-                view!!.hpPoints.setBackgroundColor(resources.getColor(R.color.colorPrimary,null))
-            }
+            startCalculate()
         }
+    }
+
+    private fun startCalculate() {
+        var pointsHP : Int = 0
+        var pointsStamina : Int = 0
+        var pointsWeight : Int = 0
+        var pointsDamage : Int = 0
+        var pointsSpeed : Int = 0
+        var pointsOxygen : Int = 0
+        var pointsFood : Int = 0
+        if (statusRG.checkedRadioButtonId == R.id.wildRB) {
+            pointsHP = calculateWild(hpNumberET.text.toString().toFloat(),actualDino.baseHP,actualDino.iwHP)
+            pointsStamina = calculateWild(staminaNumberET.text.toString().toFloat(),actualDino.baseStamina,actualDino.iwStamina)
+            pointsWeight = calculateWild(weightNumberET.text.toString().toFloat(),actualDino.baseWeight,actualDino.iwWeight)
+            pointsDamage = calculateWild(damageNumberET.text.toString().toFloat()/100,actualDino.baseDamage/100,actualDino.iwDamage)
+            pointsSpeed = calculateWild(speedNumberET.text.toString().toFloat()/100,actualDino.baseSpeed/100,actualDino.iwSpeed)
+            pointsOxygen = calculateWild(oxygenNumberET.text.toString().toFloat(),actualDino.baseOxygen,actualDino.iwOxygen)
+            pointsFood = calculateWild(foodNumberET.text.toString().toFloat(),actualDino.baseFood,actualDino.iwFood)
+        } else if (statusRG.checkedRadioButtonId == R.id.tamedRB) {
+            pointsHP = calculateTamed(hpNumberET.text.toString().toFloat(),actualDino.taHP,0.14F,actualDino.tmHP
+                ,0.44F,actualDino.baseHP,actualDino.tbhm,actualDino.iwHP,effectET.text.toString().toFloat()/100)
+            pointsStamina = calculateTamed(staminaNumberET.text.toString().toFloat(),actualDino.taStamina,1F,actualDino.tmStamina
+                ,1F,actualDino.baseStamina,actualDino.iwStamina,effectET.text.toString().toFloat()/100)
+            pointsWeight = calculateTamed(weightNumberET.text.toString().toFloat(),actualDino.taWeight,1F,actualDino.tmWeight
+                ,1F,actualDino.baseWeight,actualDino.iwWeight,effectET.text.toString().toFloat()/100)
+            pointsDamage = calculateTamed(damageNumberET.text.toString().toFloat()/100,actualDino.taDamage,0.14F,actualDino.tmDamage
+                ,0.44F,actualDino.baseDamage/100,actualDino.iwDamage,effectET.text.toString().toFloat()/100)
+            pointsFood = calculateTamed(foodNumberET.text.toString().toFloat(),actualDino.taFood,1F,actualDino.taFood
+                ,1F,actualDino.baseFood,actualDino.iwFood,effectET.text.toString().toFloat()/100)
+            pointsOxygen = calculateTamed(oxygenNumberET.text.toString().toFloat(),actualDino.taOxygen,1F,actualDino.tmOxygen
+                ,1F,actualDino.baseOxygen,actualDino.iwOxygen,effectET.text.toString().toFloat()/100)
+            pointsSpeed = calculateTamed(speedNumberET.text.toString().toFloat()/100,actualDino.taSpeed,1F,actualDino.tmSpeed
+                ,1F,actualDino.baseSpeed/100,actualDino.iwSpeed,effectET.text.toString().toFloat()/100)
+        } else {
+            pointsHP = calculateBreed(hpNumberET.text.toString().toFloat(),actualDino.taHP,0.14F,actualDino.tmHP
+                ,0.44F,actualDino.baseHP,actualDino.tbhm,actualDino.iwHP,1.0F,imprintET.text.toString().toFloat()/100)
+            pointsDamage = calculateBreed(damageNumberET.text.toString().toFloat()/100,actualDino.taDamage,0.14F,actualDino.tmDamage
+                ,0.44F,actualDino.baseDamage/100,actualDino.iwDamage,1.0F,imprintET.text.toString().toFloat()/100)
+            pointsFood = calculateBreed(foodNumberET.text.toString().toFloat(),actualDino.taFood,1F,actualDino.tmFood
+                ,1F,actualDino.baseFood,actualDino.iwFood,1.0F,imprintET.text.toString().toFloat()/100)
+            pointsSpeed = calculateBreed(speedNumberET.text.toString().toFloat()/100,actualDino.taSpeed,1F,actualDino.tmSpeed
+                ,1F,actualDino.baseSpeed/100,actualDino.iwSpeed,1.0F,imprintET.text.toString().toFloat()/100)
+            pointsWeight = calculateBreed(weightNumberET.text.toString().toFloat(),actualDino.taWeight,1F,actualDino.tmWeight
+                ,1F,actualDino.baseWeight,actualDino.iwWeight,1.0F,imprintET.text.toString().toFloat()/100)
+            pointsOxygen = calculateWild(oxygenNumberET.text.toString().toFloat(),actualDino.baseOxygen,actualDino.iwOxygen)
+            pointsStamina = calculateWild(staminaNumberET.text.toString().toFloat(),actualDino.baseStamina,actualDino.iwStamina)
+        }
+        checkQuality(hpPoints,pointsHP)
+        checkQuality(staminaPoints,pointsStamina)
+        checkQuality(weigthPoints,pointsWeight)
+        checkQuality(damagePoints,pointsDamage)
+        checkQuality(speedPoints,pointsSpeed)
+        checkQuality(oxygenPoints,pointsOxygen)
+        checkQuality(foodPoints,pointsFood)
+    }
+
+    private fun calculateBreed(
+        v: Float,
+        ta: Float,
+        taM: Float,
+        tm: Float,
+        tmM: Float,
+        b: Float,
+        tbhm: Float,
+        iw: Float,
+        te: Float,
+        ib : Float
+    ): Int {
+        var ibf : Float
+        if (ib == 4000F) {
+            ibf = (1).toFloat()
+        } else {
+            ibf = (1+ib*0.2*1).toFloat()
+        }
+        val tmf : Float
+        if (tm<0) {
+            tmf = 1 + (tm*tmM)
+        } else {
+            tmf = 1 + (tm*te*tmM)
+        }
+        if ((v-ta*taM*tmf-b*tbhm*tmf*ibf)/(b*iw*1*tbhm*tmf*ibf) <= 0F) {
+            return 0
+        }
+        return Math.round((v-ta*taM*tmf-b*tbhm*tmf*ibf)/(b*iw*1*tbhm*tmf*ibf))
+    }
+
+    private fun calculateBreed(
+        v: Float,
+        ta: Float,
+        taM: Float,
+        tm: Float,
+        tmM: Float,
+        b: Float,
+        iw: Float,
+        te: Float,
+        ib : Float
+    ): Int {
+        val ibf = (1+ib*0.2*1).toFloat()
+        val tmf : Float
+        if (tm<0) {
+            tmf = 1 + (tm*tmM)
+        } else {
+            tmf = 1 + (tm*te*tmM)
+        }
+        if ((v-ta*taM*tmf-b*ibf*tmf)/(b*iw*1*tmf*ibf) <= 0F) {
+            return 0
+        }
+        return Math.round((v-ta*taM*tmf-b*ibf*tmf)/(b*iw*1*tmf*ibf))
+    }
+
+    private fun calculateTamed(
+        v: Float,
+        ta: Float,
+        taM: Float,
+        tm: Float,
+        tmM: Float,
+        b: Float,
+        tbhm: Float,
+        iw: Float,
+        te: Float
+    ): Int {
+        val tmf : Float
+        if (tm<0) {
+            tmf = 1 + (tm*tmM)
+        } else {
+            tmf = 1 + (tm*te*tmM)
+        }
+        if ((v-ta*taM*tmf-b*tbhm*tmf)/(b*iw*1*tbhm*tmf) <= 0F) {
+            return 0
+        }
+        return Math.round((v-ta*taM*tmf-b*tbhm*tmf)/(b*iw*1*tbhm*tmf))
+    }
+
+    private fun calculateTamed(
+        v: Float,
+        ta: Float,
+        taM: Float,
+        tm: Float,
+        tmM: Float,
+        b: Float,
+        iw: Float,
+        te: Float
+    ): Int {
+        val tmf : Float
+        if (tm<0) {
+            tmf = 1 + (tm*tmM)
+        } else {
+            tmf = 1 + (tm*te*tmM)
+        }
+        if ((v-ta*taM*tmf-b*tmf)/(b*iw*1*tmf) <= 0F) {
+            return 0
+        }
+        return Math.round((v-ta*taM*tmf-b*tmf)/(b*iw*1*tmf))
+    }
+
+    private fun checkQuality(pointsTV: TextView?, points: Int) {
+        pointsTV!!.setText(points.toString())
+        when {
+            points in (average-(average/10))..(average+(average/10)) -> pointsTV.setBackgroundColor(resources.getColor(R.color.colorAccent,null))
+            points < average-(average/10) -> pointsTV.setBackgroundColor(resources.getColor(R.color.colorPrimary,null))
+            points > average+(average/10) -> pointsTV.setBackgroundColor(resources.getColor(R.color.colorPrimaryDark,null))
+        }
+    }
+
+    private fun calculateWild(v: Float, b: Float, iw: Float): Int {
+        return Math.round((v-b)/(b*iw*1))
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
