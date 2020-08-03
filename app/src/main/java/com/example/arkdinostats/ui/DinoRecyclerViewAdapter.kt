@@ -44,6 +44,7 @@ class DinoRecyclerViewAdapter(
             val fragment : Fragment = CalculatorFragment()
             val bundle = Bundle()
             bundle.putString("name",dinoName)
+            bundle.putSerializable("dino",item)
             fragment.arguments = bundle
             fragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer,fragment)

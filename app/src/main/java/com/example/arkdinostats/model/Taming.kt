@@ -10,12 +10,15 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 package com.example.arkdinostats.model
 
+import com.google.gson.annotations.SerializedName
+
 data class Taming (
-	val nonViolent : Boolean,
-	val violent : Boolean,
-	val tamingIneffectiveness : Double,
-	val affinityNeeded0 : Int,
-	val affinityIncreasePL : Float,
-	val foodConsumptionBase : Double,
-	val foodConsumptionMult : Float
+	@SerializedName("nonViolent") val nonViolent : Boolean,
+	@SerializedName("violent") val violent : Boolean,
+	@SerializedName("tamingIneffectiveness") val tamingIneffectiveness : Double,
+	@SerializedName("affinityNeeded0") val affinityNeeded0 : Int,
+	@SerializedName("affinityIncreasePL") val affinityIncreasePL : Float,
+	@SerializedName("torporDepletionPS0") val torporDepletionPS0 : Float,
+	@SerializedName("foodConsumptionBase") val foodConsumptionBase : Double,
+	@SerializedName("foodConsumptionMult") val foodConsumptionMult : Float
 )

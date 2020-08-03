@@ -221,6 +221,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="@+id/hpNumberET"
             app:layout_constraintStart_toEndOf="@+id/hpNumberET"
             app:layout_constraintTop_toTopOf="@+id/hpNumberET" />
@@ -230,6 +231,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="@+id/staminaNumberET"
             app:layout_constraintStart_toEndOf="@+id/staminaNumberET"
             app:layout_constraintTop_toTopOf="@+id/staminaNumberET" />
@@ -239,6 +241,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="@+id/oxygenNumberET"
             app:layout_constraintStart_toEndOf="@+id/oxygenNumberET"
             app:layout_constraintTop_toTopOf="@+id/oxygenNumberET" />
@@ -248,6 +251,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="@+id/foodNumberET"
             app:layout_constraintStart_toEndOf="@+id/foodNumberET"
             app:layout_constraintTop_toTopOf="@+id/foodNumberET" />
@@ -257,6 +261,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="@+id/weightNumberET"
             app:layout_constraintStart_toEndOf="@+id/weightNumberET"
             app:layout_constraintTop_toTopOf="@+id/weightNumberET" />
@@ -266,6 +271,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="@+id/damageNumberET"
             app:layout_constraintStart_toEndOf="@+id/damageNumberET"
             app:layout_constraintTop_toTopOf="@+id/damageNumberET" />
@@ -275,6 +281,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="@+id/speedNumberET"
             app:layout_constraintStart_toEndOf="@+id/speedNumberET"
             app:layout_constraintTop_toTopOf="@+id/speedNumberET" />
@@ -339,14 +346,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.35" />
+            app:layout_constraintGuide_begin="131dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.4" />
+            app:layout_constraintGuide_begin="259dp" />
 
         <TextView
             android:id="@+id/averageTV"

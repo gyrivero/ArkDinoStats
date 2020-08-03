@@ -13,12 +13,12 @@ import kotlinx.android.synthetic.main.fragment_calculator.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "name"
+private const val ARG_PARAM1 = "dino"
 private const val ARG_PARAM2 = "param2"
 
 class CalculatorFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
+    private var param1: Dino? = null
     private var param2: String? = null
     var average : Int = 0
     lateinit var actualDino : Dino
@@ -26,7 +26,7 @@ class CalculatorFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
+            param1 = it.getSerializable(ARG_PARAM1) as Dino?
             param2 = it.getString(ARG_PARAM2)
         }
     }
@@ -38,6 +38,7 @@ class CalculatorFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_calculator, container, false)
 
+        actualDino = param1!!
         view.effectET.visibility=View.GONE
         view.imprintET.visibility=View.GONE
         var statusIsSelected = false
@@ -76,31 +77,36 @@ class CalculatorFragment : Fragment() {
                 effectET.setError("Please indicate taming effectivenes percentage")
             } else {
                 average = view.lvlET.text.toString().toInt()
-                average = (average-1)/7
+                if (actualDino.name.contains("Astrocetus")) {
+                    average = (average-1)/6
+                } else {
+                    average = (average-1)/7
+                }
                 view.averageTV.setText("Average: $average")
+                checkPoints()
                 checkStats()
             }
         })
 
-        val dinoList : List<Dino> = ArrayList<Dino>(Dino.createDinos(Utils.jsonParse("values.json")))
-        for (dino in dinoList) {
-            if (dino.name.equals(param1)) {
-                view.nameTV.text = dino.name
-                view.dinoIV.setImageResource(dino.image)
-                view.hpNumberET.setText(dino.baseHP.toString())
-                view.staminaNumberET.setText(dino.baseStamina.toString())
-                view.damageNumberET.setText(dino.baseDamage.toString())
-                view.foodNumberET.setText(dino.baseFood.toString())
-                view.oxygenNumberET.setText(dino.baseOxygen.toString())
-                view.speedNumberET.setText(dino.baseSpeed.toString())
-                view.torpidityNumberET.setText(dino.baseTorpidity.toString())
-                view.weightNumberET.setText(dino.baseWeight.toString())
-                actualDino = dino
-                break
-            }
-        }
+        view.nameTV.text = actualDino.name
+        view.dinoIV.setImageResource(actualDino.image)
+        view.hpNumberET.setText(actualDino.baseHP.toString())
+        view.staminaNumberET.setText(actualDino.baseStamina.toString())
+        view.damageNumberET.setText(actualDino.baseDamage.toString())
+        view.foodNumberET.setText(actualDino.baseFood.toString())
+        view.oxygenNumberET.setText(actualDino.baseOxygen.toString())
+        view.speedNumberET.setText(actualDino.baseSpeed.toString())
+        view.torpidityNumberET.setText(actualDino.baseTorpidity.toString())
+        view.weightNumberET.setText(actualDino.baseWeight.toString())
         return view
     }
+
+    private fun checkPoints() {
+        if (!hpPoints.text.isNullOrEmpty()) {
+            hpPoints.text
+        }
+    }
+
 
     private fun checkStats() {
         if (hpNumberET.text.isNullOrEmpty()) {
@@ -125,13 +131,14 @@ class CalculatorFragment : Fragment() {
     }
 
     private fun startCalculate() {
-        var pointsHP : Int = 0
-        var pointsStamina : Int = 0
-        var pointsWeight : Int = 0
-        var pointsDamage : Int = 0
-        var pointsSpeed : Int = 0
-        var pointsOxygen : Int = 0
-        var pointsFood : Int = 0
+        val pointsHP : Int
+        val pointsStamina : Int
+        val pointsWeight : Int
+        val pointsDamage : Int
+        val pointsSpeed : Int
+        val pointsOxygen : Int
+        val pointsFood : Int
+        val pointsTorpidity : Int
         if (statusRG.checkedRadioButtonId == R.id.wildRB) {
             pointsHP = calculateWild(hpNumberET.text.toString().toFloat(),actualDino.baseHP,actualDino.iwHP)
             pointsStamina = calculateWild(staminaNumberET.text.toString().toFloat(),actualDino.baseStamina,actualDino.iwStamina)
@@ -140,6 +147,7 @@ class CalculatorFragment : Fragment() {
             pointsSpeed = calculateWild(speedNumberET.text.toString().toFloat()/100,actualDino.baseSpeed/100,actualDino.iwSpeed)
             pointsOxygen = calculateWild(oxygenNumberET.text.toString().toFloat(),actualDino.baseOxygen,actualDino.iwOxygen)
             pointsFood = calculateWild(foodNumberET.text.toString().toFloat(),actualDino.baseFood,actualDino.iwFood)
+            pointsTorpidity = calculateWild(torpidityNumberET.text.toString().toFloat(),actualDino.baseTorpidity,actualDino.iwTorpidity)
         } else if (statusRG.checkedRadioButtonId == R.id.tamedRB) {
             pointsHP = calculateTamed(hpNumberET.text.toString().toFloat(),actualDino.taHP,0.14F,actualDino.tmHP
                 ,0.44F,actualDino.baseHP,actualDino.tbhm,actualDino.iwHP,effectET.text.toString().toFloat()/100)
@@ -149,12 +157,15 @@ class CalculatorFragment : Fragment() {
                 ,1F,actualDino.baseWeight,actualDino.iwWeight,effectET.text.toString().toFloat()/100)
             pointsDamage = calculateTamed(damageNumberET.text.toString().toFloat()/100,actualDino.taDamage,0.14F,actualDino.tmDamage
                 ,0.44F,actualDino.baseDamage/100,actualDino.iwDamage,effectET.text.toString().toFloat()/100)
-            pointsFood = calculateTamed(foodNumberET.text.toString().toFloat(),actualDino.taFood,1F,actualDino.taFood
-                ,1F,actualDino.baseFood,actualDino.iwFood,effectET.text.toString().toFloat()/100)
             pointsOxygen = calculateTamed(oxygenNumberET.text.toString().toFloat(),actualDino.taOxygen,1F,actualDino.tmOxygen
                 ,1F,actualDino.baseOxygen,actualDino.iwOxygen,effectET.text.toString().toFloat()/100)
             pointsSpeed = calculateTamed(speedNumberET.text.toString().toFloat()/100,actualDino.taSpeed,1F,actualDino.tmSpeed
                 ,1F,actualDino.baseSpeed/100,actualDino.iwSpeed,effectET.text.toString().toFloat()/100)
+            pointsTorpidity = calculateTamed(torpidityNumberET.text.toString().toFloat(),actualDino.taTorpidity,1F,actualDino.tmTorpidity
+                ,1F,actualDino.baseTorpidity,actualDino.iwTorpidity,effectET.text.toString().toFloat()/100)
+            pointsFood = calculateTamed(foodNumberET.text.toString().toFloat(),actualDino.taFood,1F,actualDino.tmFood
+                ,1F,actualDino.baseFood,actualDino.iwFood,effectET.text.toString().toFloat()/100)
+
         } else {
             pointsHP = calculateBreed(hpNumberET.text.toString().toFloat(),actualDino.taHP,0.14F,actualDino.tmHP
                 ,0.44F,actualDino.baseHP,actualDino.tbhm,actualDino.iwHP,1.0F,imprintET.text.toString().toFloat()/100)
@@ -168,14 +179,24 @@ class CalculatorFragment : Fragment() {
                 ,1F,actualDino.baseWeight,actualDino.iwWeight,1.0F,imprintET.text.toString().toFloat()/100)
             pointsOxygen = calculateWild(oxygenNumberET.text.toString().toFloat(),actualDino.baseOxygen,actualDino.iwOxygen)
             pointsStamina = calculateWild(staminaNumberET.text.toString().toFloat(),actualDino.baseStamina,actualDino.iwStamina)
+            pointsTorpidity = calculateBreed(torpidityNumberET.text.toString().toFloat(),actualDino.taTorpidity,1F,actualDino.tmTorpidity
+                ,1F,actualDino.baseTorpidity,actualDino.iwTorpidity,1.0F,imprintET.text.toString().toFloat()/100)
         }
-        checkQuality(hpPoints,pointsHP)
-        checkQuality(staminaPoints,pointsStamina)
-        checkQuality(weigthPoints,pointsWeight)
-        checkQuality(damagePoints,pointsDamage)
-        checkQuality(speedPoints,pointsSpeed)
-        checkQuality(oxygenPoints,pointsOxygen)
-        checkQuality(foodPoints,pointsFood)
+
+        val totalPoints = pointsDamage+pointsHP+pointsFood+pointsOxygen+pointsSpeed+pointsStamina+pointsWeight
+        val isValuesOk = checkValues(totalPoints,pointsTorpidity,lvlET.text.toString().toInt())
+        checkQuality(hpPoints,pointsHP,isValuesOk)
+        checkQuality(staminaPoints,pointsStamina,isValuesOk)
+        checkQuality(weigthPoints,pointsWeight,isValuesOk)
+        checkQuality(damagePoints,pointsDamage,isValuesOk)
+        checkQuality(speedPoints,pointsSpeed,isValuesOk)
+        checkQuality(oxygenPoints,pointsOxygen,isValuesOk)
+        checkQuality(foodPoints,pointsFood,isValuesOk)
+
+    }
+
+    private fun checkValues(totalPoints: Int,pointsTorpidity: Int, lvl: Int): Boolean {
+        return (pointsTorpidity == totalPoints && pointsTorpidity == lvl-1)
     }
 
     private fun calculateBreed(
@@ -277,12 +298,17 @@ class CalculatorFragment : Fragment() {
         return Math.round((v-ta*taM*tmf-b*tmf)/(b*iw*1*tmf))
     }
 
-    private fun checkQuality(pointsTV: TextView?, points: Int) {
-        pointsTV!!.setText(points.toString())
-        when {
-            points in (average-(average/10))..(average+(average/10)) -> pointsTV.setBackgroundColor(resources.getColor(R.color.colorAccent,null))
-            points < average-(average/10) -> pointsTV.setBackgroundColor(resources.getColor(R.color.colorPrimary,null))
-            points > average+(average/10) -> pointsTV.setBackgroundColor(resources.getColor(R.color.colorPrimaryDark,null))
+    private fun checkQuality(pointsTV: TextView?, points: Int, isValuesOk : Boolean) {
+        if (isValuesOk) {
+            pointsTV!!.setText(points.toString())
+            when {
+                points in (average-(average/10))..(average+(average/10)) -> pointsTV.setBackgroundColor(resources.getColor(R.color.colorAccent,null))
+                points < average-(average/10) -> pointsTV.setBackgroundColor(resources.getColor(R.color.colorPrimary,null))
+                points > average+(average/10) -> pointsTV.setBackgroundColor(resources.getColor(R.color.colorPrimaryDark,null))
+            }
+        } else {
+            pointsTV!!.setText("0")
+            pointsTV.setBackgroundColor(resources.getColor(android.R.color.holo_red_light,null))
         }
     }
 
