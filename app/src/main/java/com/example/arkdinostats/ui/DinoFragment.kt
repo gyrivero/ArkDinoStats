@@ -209,8 +209,6 @@ class DinoFragment : Fragment()  {
             return R.drawable.ic_ankylosaurus
         } else if (name.contains("Allosaurus")) {
             return R.drawable.ic_allosaurus
-        } else if (name.contains("Ammonite")) {
-            return R.drawable.ic_ammonite
         } else if (name.contains("Anglerfish")) {
             return R.drawable.ic_anglerfish
         } else if (name.contains("Archaeopteryx")) {
@@ -271,7 +269,7 @@ class DinoFragment : Fragment()  {
             return R.drawable.ic_dunkleosteus
         } else if (name.contains("Electrophorus")) {
             return R.drawable.ic_electrophorus
-        } else if (name.contains("Equus") || name.contains("Unicorn")) {
+        } else if (name.contains("Equus")) {
             return R.drawable.ic_equus
         } else if (name.contains("Featherlight")) {
             return R.drawable.ic_featherlight
@@ -289,7 +287,7 @@ class DinoFragment : Fragment()  {
             return R.drawable.ic_giant_bee
         } else if (name.contains("Giganotosaurus")) {
             return R.drawable.ic_giganotosaurus
-        } else if (name.contains("Gigantopithecus")) {
+        } else if (name.contains("Gigantopithecus") || name.contains("Yeti")) {
             return R.drawable.ic_gigantopithecus
         } else if (name.contains("Glowtail")) {
             return R.drawable.ic_glowtail
@@ -451,6 +449,10 @@ class DinoFragment : Fragment()  {
             return R.drawable.ic_wyvern
         } else if (name.contains("Yutyrannus")) {
             return R.drawable.ic_yutyrannus
+        } else if (name.contains("Unicorn")) {
+            return R.drawable.ic_unicorn
+        } else if (name.contains("Desert Titan") || name.contains("Ice Titan")) {
+            return R.drawable.ic_desert_titan
         } else {
             return R.drawable.ic_launcher_foreground
         }

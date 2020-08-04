@@ -1,15 +1,18 @@
 package com.example.arkdinostats.ui
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.example.arkdinostats.R
-import com.example.arkdinostats.Utils
 import com.example.arkdinostats.model.Dino
 import kotlinx.android.synthetic.main.fragment_calculator.*
 import kotlinx.android.synthetic.main.fragment_calculator.view.*
+import kotlin.math.log
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -185,18 +188,23 @@ class CalculatorFragment : Fragment() {
 
         val totalPoints = pointsDamage+pointsHP+pointsFood+pointsOxygen+pointsSpeed+pointsStamina+pointsWeight
         val isValuesOk = checkValues(totalPoints,pointsTorpidity,lvlET.text.toString().toInt())
-        checkQuality(hpPoints,pointsHP,isValuesOk)
-        checkQuality(staminaPoints,pointsStamina,isValuesOk)
-        checkQuality(weigthPoints,pointsWeight,isValuesOk)
-        checkQuality(damagePoints,pointsDamage,isValuesOk)
-        checkQuality(speedPoints,pointsSpeed,isValuesOk)
-        checkQuality(oxygenPoints,pointsOxygen,isValuesOk)
-        checkQuality(foodPoints,pointsFood,isValuesOk)
+        val wastedPoints = pointsTorpidity - totalPoints
+        Toast.makeText(activity, "Wasted: $wastedPoints. Total: $totalPoints. Torpidity: $pointsTorpidity", Toast.LENGTH_SHORT).show()
+        checkQuality(hpPoints,pointsHP,isValuesOk,wastedPoints)
+        checkQuality(staminaPoints,pointsStamina,isValuesOk,wastedPoints)
+        checkQuality(weigthPoints,pointsWeight,isValuesOk,wastedPoints)
+        checkQuality(damagePoints,pointsDamage,isValuesOk,wastedPoints)
+        checkQuality(speedPoints,pointsSpeed,isValuesOk,wastedPoints)
+        checkQuality(oxygenPoints,pointsOxygen,isValuesOk,wastedPoints)
+        checkQuality(foodPoints,pointsFood,isValuesOk,wastedPoints)
+        if (!isValuesOk) {
+            showDialog()
+        }
 
     }
 
     private fun checkValues(totalPoints: Int,pointsTorpidity: Int, lvl: Int): Boolean {
-        return (pointsTorpidity == totalPoints && pointsTorpidity == lvl-1)
+        return (pointsTorpidity >= totalPoints && pointsTorpidity == lvl-1)
     }
 
     private fun calculateBreed(
@@ -211,8 +219,12 @@ class CalculatorFragment : Fragment() {
         te: Float,
         ib : Float
     ): Int {
-        var ibf : Float
-        if (ib == 4000F) {
+        val ibf : Float
+        var taMCopy = taM
+        if (ta<0) {
+            taMCopy = 1F
+        }
+        if (ib <= 0F) {
             ibf = (1).toFloat()
         } else {
             ibf = (1+ib*0.2*1).toFloat()
@@ -223,10 +235,23 @@ class CalculatorFragment : Fragment() {
         } else {
             tmf = 1 + (tm*te*tmM)
         }
-        if ((v-ta*taM*tmf-b*tbhm*tmf*ibf)/(b*iw*1*tbhm*tmf*ibf) <= 0F) {
-            return 0
+
+        var calculateOK = false
+
+        for (i in 0..600) {
+            val resultValue =  (b* (1+i*iw*1)*tbhm*ibf+ta*taMCopy)*tmf
+            val range = v-1..v+1
+            if (resultValue in range) {
+                calculateOK = true
+            }
         }
-        return Math.round((v-ta*taM*tmf-b*tbhm*tmf*ibf)/(b*iw*1*tbhm*tmf*ibf))
+        if (calculateOK) {
+            if ((v-ta*taMCopy*tmf-b*tbhm*tmf*ibf)/(b*iw*1*tbhm*tmf*ibf) <= 0F) {
+                return 0
+            }
+            return Math.round((v-ta*taMCopy*tmf-b*tbhm*tmf*ibf)/(b*iw*1*tbhm*tmf*ibf))
+        }
+        return 1000
     }
 
     private fun calculateBreed(
@@ -242,15 +267,34 @@ class CalculatorFragment : Fragment() {
     ): Int {
         val ibf = (1+ib*0.2*1).toFloat()
         val tmf : Float
+        var taMCopy = taM
+        if (ta<0) {
+            taMCopy = 1F
+        }
         if (tm<0) {
             tmf = 1 + (tm*tmM)
         } else {
             tmf = 1 + (tm*te*tmM)
         }
-        if ((v-ta*taM*tmf-b*ibf*tmf)/(b*iw*1*tmf*ibf) <= 0F) {
-            return 0
+
+        var calculateOK = false
+
+        for (i in 0..600) {
+            val resultValue =  (b* (1+i*iw*1)*ibf+ta*taMCopy)*tmf
+            val range = v-1..v+1
+            Log.i("CheckNew", "Input: $v -> points: $i resultvalue: $resultValue ")
+            if (resultValue in range) {
+                calculateOK = true
+            }
         }
-        return Math.round((v-ta*taM*tmf-b*ibf*tmf)/(b*iw*1*tmf*ibf))
+
+        if (calculateOK) {
+            if ((v-ta*taMCopy*tmf-b*ibf*tmf)/(b*iw*1*tmf*ibf) <= 0F) {
+                return 0
+            }
+            return Math.round((v-ta*taMCopy*tmf-b*ibf*tmf)/(b*iw*1*tmf*ibf))
+        }
+        return 1000
     }
 
     private fun calculateTamed(
@@ -265,15 +309,33 @@ class CalculatorFragment : Fragment() {
         te: Float
     ): Int {
         val tmf : Float
+        var taMCopy = taM
+        if (ta<0) {
+            taMCopy = 1F
+        }
         if (tm<0) {
             tmf = 1 + (tm*tmM)
         } else {
             tmf = 1 + (tm*te*tmM)
         }
-        if ((v-ta*taM*tmf-b*tbhm*tmf)/(b*iw*1*tbhm*tmf) <= 0F) {
-            return 0
+
+        var calculateOk = false
+
+        for (i in 0..600) {
+            val resultValue =  (b* (1+i*iw*1)*tbhm+ta*taMCopy)*tmf
+            val range = v-1..v+1
+            if (resultValue in range) {
+                calculateOk = true
+            }
         }
-        return Math.round((v-ta*taM*tmf-b*tbhm*tmf)/(b*iw*1*tbhm*tmf))
+
+        if (calculateOk) {
+            if ((v-ta*taM*tmf-b*tbhm*tmf)/(b*iw*1*tbhm*tmf) <= 0F) {
+                return 0
+            }
+            return Math.round((v-ta*taM*tmf-b*tbhm*tmf)/(b*iw*1*tbhm*tmf))
+        }
+        return 1000
     }
 
     private fun calculateTamed(
@@ -287,33 +349,87 @@ class CalculatorFragment : Fragment() {
         te: Float
     ): Int {
         val tmf : Float
+        var taMCopy = taM
+        if (ta<0) {
+            taMCopy = 1F
+        }
         if (tm<0) {
             tmf = 1 + (tm*tmM)
         } else {
             tmf = 1 + (tm*te*tmM)
         }
-        if ((v-ta*taM*tmf-b*tmf)/(b*iw*1*tmf) <= 0F) {
-            return 0
+
+        var calculateOK = false
+
+        for (i in 0..100) {
+            val resultValue =  (b* (1+i*iw*1)+ta*taMCopy)*tmf
+            val range = v-1..v+1
+            if (resultValue in range) {
+                calculateOK = true
+            }
         }
-        return Math.round((v-ta*taM*tmf-b*tmf)/(b*iw*1*tmf))
+
+        if (calculateOK) {
+            if ((v-ta*taM*tmf-b*tmf)/(b*iw*1*tmf) <= 0F) {
+                return 0
+            }
+            return Math.round((v-ta*taM*tmf-b*tmf)/(b*iw*1*tmf))
+        }
+        return 1000
     }
 
-    private fun checkQuality(pointsTV: TextView?, points: Int, isValuesOk : Boolean) {
+    private fun checkQuality(
+        pointsTV: TextView?,
+        points: Int,
+        isValuesOk: Boolean,
+        wastedPoints: Int
+    ) {
         if (isValuesOk) {
+            if (wastedPoints == 0) {
+                Toast.makeText(activity, "Wasted Points: $wastedPoints", Toast.LENGTH_LONG).show()
+            }
+        }
+        if (points==1000) {
+            pointsTV!!.setText("!!")
+            pointsTV.setBackgroundColor(resources.getColor(android.R.color.holo_red_light,null))
+        } else {
             pointsTV!!.setText(points.toString())
             when {
                 points in (average-(average/10))..(average+(average/10)) -> pointsTV.setBackgroundColor(resources.getColor(R.color.colorAccent,null))
                 points < average-(average/10) -> pointsTV.setBackgroundColor(resources.getColor(R.color.colorPrimary,null))
                 points > average+(average/10) -> pointsTV.setBackgroundColor(resources.getColor(R.color.colorPrimaryDark,null))
             }
-        } else {
-            pointsTV!!.setText("0")
-            pointsTV.setBackgroundColor(resources.getColor(android.R.color.holo_red_light,null))
         }
     }
 
+    private fun showDialog() {
+        val builder: AlertDialog.Builder? = activity?.let {
+            AlertDialog.Builder(it)
+        }
+        builder!!.setMessage("Algo salio mal")
+            .setTitle("Error")
+            .setCancelable(false)
+            .setNeutralButton("Aceptar", DialogInterface.OnClickListener{dialog, which -> dialog.dismiss() })
+        val dialog: AlertDialog? = builder.create()
+        dialog!!.show()
+    }
+
     private fun calculateWild(v: Float, b: Float, iw: Float): Int {
-        return Math.round((v-b)/(b*iw*1))
+
+        var calculateOK = false
+
+        for (i in 0..100) {
+            val resultValue = b* (1+i*iw*1)
+            val range = v-1..v+1
+            if (resultValue in range) {
+                calculateOK = true
+            }
+        }
+
+        if (calculateOK) {
+            return Math.round((v-b)/(b*iw*1))
+        }
+        return 1000
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
