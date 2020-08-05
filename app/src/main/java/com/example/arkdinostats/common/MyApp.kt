@@ -1,7 +1,6 @@
-package com.example.arkdinostats
+package com.example.arkdinostats.common
 
 import android.app.Application
-import android.content.Context
 
 class MyApp: Application() {
 
