@@ -71,13 +71,13 @@ class CalculatorFragment : Fragment() {
 
         view.checkBtn.setOnClickListener(View.OnClickListener {
             if (view.lvlET.text.isNullOrEmpty()) {
-                lvlET.setError("Please indicate the level")
+                lvlET.setError(getString(R.string.level_nedeed))
             } else if (!statusIsSelected) {
-                lvlET.setError("Please indicate status")
+                lvlET.setError(getString(R.string.status_nedeed))
             } else if (view.imprintET.visibility == View.VISIBLE && view.imprintET.text.isNullOrEmpty()) {
-                imprintET.setError("Please indicate imprint percentage")
+                imprintET.setError(getString(R.string.imprint_nedeed))
             } else if (view.effectET.visibility == View.VISIBLE && view.effectET.text.isNullOrEmpty()) {
-                effectET.setError("Please indicate taming effectivenes percentage")
+                effectET.setError(getString(R.string.effectiveness_nedeed))
             } else {
                 average = view.lvlET.text.toString().toInt()
                 if (actualDino.name.contains("Astrocetus")) {
@@ -85,7 +85,7 @@ class CalculatorFragment : Fragment() {
                 } else {
                     average = (average-1)/7
                 }
-                view.averageTV.setText("Average: $average")
+                view.averageTV.setText(getString(R.string.average) + average)
                 checkPoints()
                 checkStats()
             }
@@ -113,21 +113,21 @@ class CalculatorFragment : Fragment() {
 
     private fun checkStats() {
         if (hpNumberET.text.isNullOrEmpty()) {
-            hpNumberET.setError("Please indicate the Health Points")
+            hpNumberET.setError(getString(R.string.health_nedeed))
         } else if (staminaNumberET.text.isNullOrEmpty()) {
-            staminaNumberET.setError("Please indicate the Stamina Points")
+            staminaNumberET.setError(getString(R.string.stamina_nedeed))
         } else if (oxygenNumberET.text.isNullOrEmpty()) {
-            oxygenNumberET.setError("Please indicate the Oxygen Points")
+            oxygenNumberET.setError(getString(R.string.oxygen_nedeed))
         } else if (foodNumberET.text.isNullOrEmpty()) {
-            foodNumberET.setError("Please indicate the Food Points")
+            foodNumberET.setError(getString(R.string.food_nedeed))
         } else if (weightNumberET.text.isNullOrEmpty()) {
-            weightNumberET.setError("Please indicate the Weight Points")
+            weightNumberET.setError(getString(R.string.wight_nedeed))
         } else if (damageNumberET.text.isNullOrEmpty()) {
-            damageNumberET.setError("Please indicate the Damage Points")
+            damageNumberET.setError(getString(R.string.damage_nedeed))
         } else if (speedNumberET.text.isNullOrEmpty()) {
-            speedNumberET.setError("Please indicate the Speed Points")
+            speedNumberET.setError(getString(R.string.speed_nedeed))
         } else if (torpidityNumberET.text.isNullOrEmpty()) {
-            torpidityNumberET.setError("Please indicate the Torpidity Points")
+            torpidityNumberET.setError(getString(R.string.torpidity_nedeed))
         } else {
             startCalculate()
         }
@@ -189,7 +189,6 @@ class CalculatorFragment : Fragment() {
         val totalPoints = pointsDamage+pointsHP+pointsFood+pointsOxygen+pointsSpeed+pointsStamina+pointsWeight
         val isValuesOk = checkValues(totalPoints,pointsTorpidity,lvlET.text.toString().toInt())
         val wastedPoints = pointsTorpidity - totalPoints
-        Toast.makeText(activity, "Wasted: $wastedPoints. Total: $totalPoints. Torpidity: $pointsTorpidity", Toast.LENGTH_SHORT).show()
         checkQuality(hpPoints,pointsHP,isValuesOk,wastedPoints)
         checkQuality(staminaPoints,pointsStamina,isValuesOk,wastedPoints)
         checkQuality(weigthPoints,pointsWeight,isValuesOk,wastedPoints)
@@ -282,7 +281,6 @@ class CalculatorFragment : Fragment() {
         for (i in 0..600) {
             val resultValue =  (b* (1+i*iw*1)*ibf+ta*taMCopy)*tmf
             val range = v-1..v+1
-            Log.i("CheckNew", "Input: $v -> points: $i resultvalue: $resultValue ")
             if (resultValue in range) {
                 calculateOK = true
             }
@@ -385,8 +383,8 @@ class CalculatorFragment : Fragment() {
         wastedPoints: Int
     ) {
         if (isValuesOk) {
-            if (wastedPoints == 0) {
-                Toast.makeText(activity, "Wasted Points: $wastedPoints", Toast.LENGTH_LONG).show()
+            if (wastedPoints != 0) {
+                view!!.wastedPoints.setText(wastedPoints.toString())
             }
         }
         if (points==1000) {
@@ -406,10 +404,10 @@ class CalculatorFragment : Fragment() {
         val builder: AlertDialog.Builder? = activity?.let {
             AlertDialog.Builder(it)
         }
-        builder!!.setMessage("Algo salio mal")
-            .setTitle("Error")
+        builder!!.setMessage(getString(R.string.stats_error_dialog_message))
+            .setTitle(getString(R.string.error))
             .setCancelable(false)
-            .setNeutralButton("Aceptar", DialogInterface.OnClickListener{dialog, which -> dialog.dismiss() })
+            .setNeutralButton(getString(R.string.ok), DialogInterface.OnClickListener{ dialog, which -> dialog.dismiss() })
         val dialog: AlertDialog? = builder.create()
         dialog!!.show()
     }

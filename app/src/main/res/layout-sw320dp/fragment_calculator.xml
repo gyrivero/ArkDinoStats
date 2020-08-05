@@ -37,12 +37,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6sp"
+            android:layout_marginTop="16dp"
             android:text="@string/health"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/staminaTV"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline2"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintVertical_chainStyle="spread_inside" />
 
         <TextView
             android:id="@+id/staminaTV"
@@ -124,9 +125,29 @@
             android:layout_marginTop="16dp"
             android:text="@string/torpidity"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/wastedTV"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/speedTV" />
+
+        <TextView
+            android:id="@+id/wastedTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6sp"
+            android:layout_marginTop="16dp"
+            android:text="@string/wasted"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/torpidityTV" />
+
+        <TextView
+            android:id="@+id/wastedPoints"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@+id/wastedTV"
+            app:layout_constraintStart_toStartOf="@+id/guideline" />
 
         <EditText
             android:id="@+id/hpNumberET"
@@ -353,7 +374,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="259dp" />
+            app:layout_constraintGuide_begin="240dp" />
 
         <TextView
             android:id="@+id/averageTV"
@@ -370,8 +391,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:textSize="14sp"
             android:text="@string/checkBtn"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@+id/averageTV"
             app:layout_constraintTop_toBottomOf="@+id/averageTV" />
 

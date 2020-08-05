@@ -17,15 +17,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textSize="24sp"
+            android:textSize="8sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/dinoIV"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="8dp"
             android:src="@drawable/ic_launcher_foreground"
             app:layout_constraintEnd_toEndOf="@+id/nameTV"
@@ -36,22 +36,22 @@
             android:id="@+id/hpTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
+            android:layout_marginStart="4dp"
             android:text="@string/health"
-            android:textSize="18sp"
+            android:textSize="8sp"
             app:layout_constraintBottom_toTopOf="@+id/staminaTV"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline2"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintTop_toBottomOf="@+id/guideline2"
+            app:layout_constraintVertical_chainStyle="spread_inside" />
 
         <TextView
             android:id="@+id/staminaTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="5dp"
             android:text="@string/stamina"
-            android:textSize="18sp"
+            android:textSize="8sp"
             app:layout_constraintBottom_toTopOf="@+id/oxygenTV"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/hpTV" />
@@ -60,10 +60,10 @@
             android:id="@+id/oxygenTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="5dp"
             android:text="@string/oxygen"
-            android:textSize="18sp"
+            android:textSize="8sp"
             app:layout_constraintBottom_toTopOf="@+id/foodTV"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/staminaTV" />
@@ -72,10 +72,10 @@
             android:id="@+id/foodTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="5dp"
             android:text="@string/food"
-            android:textSize="18sp"
+            android:textSize="8sp"
             app:layout_constraintBottom_toTopOf="@+id/weightTV"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/oxygenTV" />
@@ -84,10 +84,10 @@
             android:id="@+id/weightTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="5dp"
             android:text="@string/weight"
-            android:textSize="18sp"
+            android:textSize="8sp"
             app:layout_constraintBottom_toTopOf="@+id/damageTV"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/foodTV" />
@@ -96,10 +96,10 @@
             android:id="@+id/damageTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="5dp"
             android:text="@string/damage"
-            android:textSize="18sp"
+            android:textSize="8sp"
             app:layout_constraintBottom_toTopOf="@+id/speedTV"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/weightTV" />
@@ -108,10 +108,10 @@
             android:id="@+id/speedTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="5dp"
             android:text="@string/speed"
-            android:textSize="18sp"
+            android:textSize="8sp"
             app:layout_constraintBottom_toTopOf="@+id/torpidityTV"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/damageTV" />
@@ -120,22 +120,43 @@
             android:id="@+id/torpidityTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="5dp"
             android:text="@string/torpidity"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="8sp"
+            app:layout_constraintBottom_toTopOf="@+id/wastedTV"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/speedTV" />
+
+        <TextView
+            android:id="@+id/wastedTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/wasted"
+            android:textSize="8sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/torpidityTV" />
+
+        <TextView
+            android:id="@+id/wastedPoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="4sp"
+            app:layout_constraintBottom_toBottomOf="@+id/wastedTV"
+            app:layout_constraintStart_toStartOf="@+id/guideline" />
 
         <EditText
             android:id="@+id/hpNumberET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="6"
+            android:ems="5"
             android:inputType="numberDecimal"
             android:maxLength="10"
-            android:textSize="14sp"
+            android:textSize="4sp"
             app:layout_constraintBottom_toBottomOf="@+id/hpTV"
             app:layout_constraintStart_toStartOf="@+id/guideline" />
 
@@ -143,10 +164,10 @@
             android:id="@+id/oxygenNumberET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="6"
+            android:ems="5"
             android:inputType="numberDecimal"
             android:maxLength="10"
-            android:textSize="14sp"
+            android:textSize="4sp"
             app:layout_constraintBottom_toBottomOf="@+id/oxygenTV"
             app:layout_constraintStart_toStartOf="@+id/guideline" />
 
@@ -154,10 +175,10 @@
             android:id="@+id/foodNumberET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="6"
+            android:ems="5"
             android:inputType="numberDecimal"
             android:maxLength="10"
-            android:textSize="14sp"
+            android:textSize="4sp"
             app:layout_constraintBottom_toBottomOf="@+id/foodTV"
             app:layout_constraintStart_toStartOf="@+id/guideline" />
 
@@ -165,10 +186,10 @@
             android:id="@+id/weightNumberET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="6"
+            android:ems="5"
             android:inputType="numberDecimal"
             android:maxLength="10"
-            android:textSize="14sp"
+            android:textSize="4sp"
             app:layout_constraintBottom_toBottomOf="@+id/weightTV"
             app:layout_constraintStart_toStartOf="@+id/guideline" />
 
@@ -176,10 +197,10 @@
             android:id="@+id/damageNumberET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="6"
+            android:ems="5"
             android:inputType="numberDecimal"
             android:maxLength="10"
-            android:textSize="14sp"
+            android:textSize="4sp"
             app:layout_constraintBottom_toBottomOf="@+id/damageTV"
             app:layout_constraintStart_toStartOf="@+id/guideline" />
 
@@ -187,10 +208,10 @@
             android:id="@+id/speedNumberET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="6"
+            android:ems="5"
             android:inputType="numberDecimal"
             android:maxLength="10"
-            android:textSize="14sp"
+            android:textSize="4sp"
             app:layout_constraintBottom_toBottomOf="@+id/speedTV"
             app:layout_constraintStart_toStartOf="@+id/guideline" />
 
@@ -198,10 +219,10 @@
             android:id="@+id/torpidityNumberET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="6"
+            android:ems="5"
             android:inputType="numberDecimal"
             android:maxLength="10"
-            android:textSize="14sp"
+            android:textSize="4sp"
             app:layout_constraintBottom_toBottomOf="@+id/torpidityTV"
             app:layout_constraintStart_toStartOf="@+id/guideline" />
 
@@ -209,10 +230,10 @@
             android:id="@+id/staminaNumberET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="6"
+            android:ems="5"
             android:inputType="numberDecimal"
             android:maxLength="10"
-            android:textSize="14sp"
+            android:textSize="4sp"
             app:layout_constraintBottom_toBottomOf="@+id/staminaTV"
             app:layout_constraintStart_toStartOf="@+id/guideline" />
 
@@ -220,7 +241,8 @@
             android:id="@+id/hpPoints"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="2dp"
+            android:textSize="4sp"
             app:layout_constraintBottom_toBottomOf="@+id/hpNumberET"
             app:layout_constraintStart_toEndOf="@+id/hpNumberET" />
 
@@ -228,7 +250,8 @@
             android:id="@+id/staminaPoints"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="2dp"
+            android:textSize="4sp"
             app:layout_constraintBottom_toBottomOf="@+id/staminaNumberET"
             app:layout_constraintStart_toEndOf="@+id/staminaNumberET" />
 
@@ -236,7 +259,8 @@
             android:id="@+id/oxygenPoints"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="2dp"
+            android:textSize="4sp"
             app:layout_constraintBottom_toBottomOf="@+id/oxygenNumberET"
             app:layout_constraintStart_toEndOf="@+id/oxygenNumberET" />
 
@@ -244,7 +268,8 @@
             android:id="@+id/foodPoints"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="2dp"
+            android:textSize="4sp"
             app:layout_constraintBottom_toBottomOf="@+id/foodNumberET"
             app:layout_constraintStart_toEndOf="@+id/foodNumberET" />
 
@@ -252,7 +277,8 @@
             android:id="@+id/weigthPoints"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="2dp"
+            android:textSize="4sp"
             app:layout_constraintBottom_toBottomOf="@+id/weightNumberET"
             app:layout_constraintStart_toEndOf="@+id/weightNumberET" />
 
@@ -260,7 +286,8 @@
             android:id="@+id/damagePoints"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="2dp"
+            android:textSize="4sp"
             app:layout_constraintBottom_toBottomOf="@+id/damageNumberET"
             app:layout_constraintStart_toEndOf="@+id/damageNumberET" />
 
@@ -268,7 +295,8 @@
             android:id="@+id/speedPoints"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="2dp"
+            android:textSize="4sp"
             app:layout_constraintBottom_toBottomOf="@+id/speedNumberET"
             app:layout_constraintStart_toEndOf="@+id/speedNumberET" />
 
@@ -276,19 +304,22 @@
             android:id="@+id/lvlET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:ems="4"
             android:hint="@string/level"
             android:inputType="number"
             android:maxLength="4"
+            android:textSize="8sp"
             app:layout_constraintBottom_toBottomOf="@+id/hpNumberET"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
         <RadioGroup
             android:id="@+id/statusRG"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lvlET">
@@ -297,19 +328,22 @@
                 android:id="@+id/wildRB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/wild" />
+                android:text="@string/wild"
+                android:textSize="8sp" />
 
             <RadioButton
                 android:id="@+id/tamedRB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/tamed" />
+                android:text="@string/tamed"
+                android:textSize="8sp" />
 
             <RadioButton
                 android:id="@+id/breededRB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/breeded" />
+                android:text="@string/breeded"
+                android:textSize="8sp" />
 
         </RadioGroup>
 
@@ -317,11 +351,12 @@
             android:id="@+id/effectET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:ems="3"
+            android:layout_marginTop="8dp"
+            android:ems="7"
             android:hint="@string/effect"
             android:inputType="number"
             android:maxLength="4"
+            android:textSize="6sp"
             app:layout_constraintStart_toStartOf="@+id/statusRG"
             app:layout_constraintTop_toBottomOf="@+id/statusRG" />
 
@@ -330,33 +365,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.27222222" />
+            app:layout_constraintGuide_begin="67dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.48" />
+            app:layout_constraintGuide_begin="98dp" />
 
         <TextView
             android:id="@+id/averageTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:text="@string/average_0"
-            android:textSize="18sp"
+            android:textSize="6sp"
             app:layout_constraintStart_toStartOf="@+id/effectET"
             app:layout_constraintTop_toBottomOf="@+id/effectET" />
 
         <Button
             android:id="@+id/checkBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_width="70dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="8dp"
             android:text="@string/checkBtn"
+            android:textSize="6sp"
             app:layout_constraintStart_toStartOf="@+id/averageTV"
-            app:layout_constraintTop_toBottomOf="@+id/averageTV" />
+            app:layout_constraintTop_toBottomOf="@+id/imprintET" />
 
         <EditText
             android:id="@+id/imprintET"
@@ -367,9 +403,9 @@
             android:hint="@string/imprint"
             android:inputType="numberDecimal"
             android:maxLength="5"
-            android:textSize="16sp"
+            android:textSize="6sp"
             app:layout_constraintStart_toStartOf="@+id/effectET"
-            app:layout_constraintTop_toBottomOf="@+id/effectET" />
+            app:layout_constraintTop_toBottomOf="@+id/averageTV" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

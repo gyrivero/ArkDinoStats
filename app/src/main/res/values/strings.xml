@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">ArkDinoStats</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="health">Health:</string>
     <string name="stamina">Stamina:</string>
     <string name="oxygen">Oxygen:</string>
@@ -18,4 +17,21 @@
     <string name="average_0">Average: 0</string>
     <string name="checkBtn">Check</string>
     <string name="imprint">Imprint %</string>
+    <string name="wasted">Wasted:</string>
+    <string name="average">Average: "</string>
+    <string name="level_nedeed">Please indicate the level</string>
+    <string name="status_nedeed">Please indicate status</string>
+    <string name="imprint_nedeed">Please indicate imprint percentage</string>
+    <string name="effectiveness_nedeed">Please indicate taming effectiveness percentage</string>
+    <string name="health_nedeed">Please indicate the Health Points</string>
+    <string name="stamina_nedeed">Please indicate the Stamina Points</string>
+    <string name="oxygen_nedeed">Please indicate the Oxygen Points</string>
+    <string name="food_nedeed">Please indicate the Food Points</string>
+    <string name="wight_nedeed">Please indicate the Weight Points</string>
+    <string name="damage_nedeed">Please indicate the Damage Points</string>
+    <string name="speed_nedeed">Please indicate the Speed Points</string>
+    <string name="torpidity_nedeed">Please indicate the Torpidity Points</string>
+    <string name="stats_error_dialog_message">Something went wrong. Check the data.</string>
+    <string name="error">Error</string>
+    <string name="ok">Ok</string>
 </resources>
