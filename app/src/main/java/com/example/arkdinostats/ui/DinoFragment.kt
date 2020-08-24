@@ -4,17 +4,16 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.appcompat.widget.SearchView
-import com.example.arkdinostats.common.MyApp
-import com.example.arkdinostats.model.Dino
 import com.example.arkdinostats.R
+import com.example.arkdinostats.common.MyApp
 import com.example.arkdinostats.common.Utils
+import com.example.arkdinostats.model.Dino
 import com.example.arkdinostats.model.JsonDino
-import java.lang.NullPointerException
 
 class DinoFragment : Fragment()  {
 

@@ -1,10 +1,7 @@
 package com.example.arkdinostats.ui
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.DisplayMetrics
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,13 +9,12 @@ import android.widget.Filter
 import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
-import com.example.arkdinostats.model.Dino
+import androidx.recyclerview.widget.RecyclerView
 import com.example.arkdinostats.R
+import com.example.arkdinostats.model.Dino
 
 class DinoRecyclerViewAdapter(
     var values: MutableList<Dino>,

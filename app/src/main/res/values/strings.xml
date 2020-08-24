@@ -34,4 +34,8 @@
     <string name="stats_error_dialog_message">Something went wrong. Check the data.</string>
     <string name="error">Error</string>
     <string name="ok">Ok</string>
+    <string name="search">Search</string>
+    <string name="add">Add</string>
+    <string name="add_dialog_message">This dino is going to be add to your collection. Are you sure?</string>
+    <string name="adding">Adding</string>
 </resources>

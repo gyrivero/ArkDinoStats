@@ -2,22 +2,32 @@ package com.example.arkdinostats.ui
 
 import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.arkdinostats.R
+import com.example.arkdinostats.db.entity.DinoEntity
 import com.example.arkdinostats.model.Dino
+import com.example.arkdinostats.viewmodel.SavedDinosViewModel
 import kotlinx.android.synthetic.main.fragment_calculator.*
 import kotlinx.android.synthetic.main.fragment_calculator.view.*
-import kotlin.math.log
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "dino"
 private const val ARG_PARAM2 = "param2"
+private lateinit var viewModel: SavedDinosViewModel
+var pointsHP : Int = 0
+var pointsStamina : Int = 0
+var pointsWeight : Int = 0
+var pointsDamage : Int = 0
+var pointsSpeed : Int = 0
+var pointsOxygen : Int = 0
+var pointsFood : Int = 0
+var pointsTorpidity : Int = 0
+var isValuesOk = false
 
 class CalculatorFragment : Fragment() {
     // TODO: Rename and change types of parameters
@@ -28,6 +38,7 @@ class CalculatorFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(activity!!).get(SavedDinosViewModel::class.java)
         arguments?.let {
             param1 = it.getSerializable(ARG_PARAM1) as Dino?
             param2 = it.getString(ARG_PARAM2)
@@ -134,14 +145,6 @@ class CalculatorFragment : Fragment() {
     }
 
     private fun startCalculate() {
-        val pointsHP : Int
-        val pointsStamina : Int
-        val pointsWeight : Int
-        val pointsDamage : Int
-        val pointsSpeed : Int
-        val pointsOxygen : Int
-        val pointsFood : Int
-        val pointsTorpidity : Int
         if (statusRG.checkedRadioButtonId == R.id.wildRB) {
             pointsHP = calculateWild(hpNumberET.text.toString().toFloat(),actualDino.baseHP,actualDino.iwHP)
             pointsStamina = calculateWild(staminaNumberET.text.toString().toFloat(),actualDino.baseStamina,actualDino.iwStamina)
@@ -187,7 +190,7 @@ class CalculatorFragment : Fragment() {
         }
 
         val totalPoints = pointsDamage+pointsHP+pointsFood+pointsOxygen+pointsSpeed+pointsStamina+pointsWeight
-        val isValuesOk = checkValues(totalPoints,pointsTorpidity,lvlET.text.toString().toInt())
+        isValuesOk = checkValues(totalPoints,pointsTorpidity,lvlET.text.toString().toInt())
         val wastedPoints = pointsTorpidity - totalPoints
         checkQuality(hpPoints,pointsHP,isValuesOk,wastedPoints)
         checkQuality(staminaPoints,pointsStamina,isValuesOk,wastedPoints)
@@ -412,6 +415,22 @@ class CalculatorFragment : Fragment() {
         dialog!!.show()
     }
 
+    private fun showAddDialog() {
+        val builder: AlertDialog.Builder? = activity?.let {
+            AlertDialog.Builder(it)
+        }
+        builder!!.setMessage(getString(R.string.add_dialog_message))
+            .setTitle(getString(R.string.adding))
+            .setCancelable(false)
+            .setPositiveButton("Yes", DialogInterface.OnClickListener{dialog, which -> viewModel.insert(
+                DinoEntity(actualDino.name,actualDino.image,null, pointsHP, pointsStamina,
+                    pointsOxygen, pointsFood, pointsWeight, pointsDamage, pointsSpeed)
+            ) })
+            .setNegativeButton("No", DialogInterface.OnClickListener{dialog, which -> dialog.dismiss() })
+        val dialog: AlertDialog? = builder.create()
+        dialog!!.show()
+    }
+
     private fun calculateWild(v: Float, b: Float, iw: Float): Int {
 
         var calculateOK = false
@@ -431,8 +450,17 @@ class CalculatorFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        menu.close()
+        inflater.inflate(R.menu.menu_calculator,menu)
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.dino_add) {
+            showAddDialog()
+            return true
+        } else {
+            return super.onOptionsItemSelected(item)
+        }
     }
 
     companion object {
