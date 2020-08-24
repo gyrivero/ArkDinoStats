@@ -1,11 +1,6 @@
 package com.example.arkdinostats.model
 
-import android.util.Log
-import android.widget.Toast
-import com.example.arkdinostats.MyApp
-import com.example.arkdinostats.R
 import java.io.Serializable
-import java.lang.NullPointerException
 
 class Dino(
     val name: String,

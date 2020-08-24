@@ -36,12 +36,11 @@
             android:id="@+id/hpTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
             android:layout_marginTop="20dp"
             android:text="@string/health"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/staminaTV"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="@+id/guideline2"
             app:layout_constraintVertical_chainStyle="spread_inside" />
 
@@ -49,96 +48,88 @@
             android:id="@+id/staminaTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
             android:layout_marginTop="20dp"
             android:text="@string/stamina"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/oxygenTV"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/hpTV" />
 
         <TextView
             android:id="@+id/oxygenTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
             android:layout_marginTop="20dp"
             android:text="@string/oxygen"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/foodTV"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/staminaTV" />
 
         <TextView
             android:id="@+id/foodTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
             android:layout_marginTop="20dp"
             android:text="@string/food"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/weightTV"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/oxygenTV" />
 
         <TextView
             android:id="@+id/weightTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
             android:layout_marginTop="20dp"
             android:text="@string/weight"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/damageTV"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/foodTV" />
 
         <TextView
             android:id="@+id/damageTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
             android:layout_marginTop="20dp"
             android:text="@string/damage"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/speedTV"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/weightTV" />
 
         <TextView
             android:id="@+id/speedTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
             android:layout_marginTop="20dp"
             android:text="@string/speed"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/torpidityTV"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/damageTV" />
 
         <TextView
             android:id="@+id/torpidityTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
             android:layout_marginTop="20dp"
             android:text="@string/torpidity"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/wastedTV"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/speedTV" />
 
         <TextView
             android:id="@+id/wastedTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
             android:layout_marginTop="20dp"
             android:text="@string/wasted"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/torpidityTV" />
 
         <TextView
@@ -154,12 +145,13 @@
             android:id="@+id/hpNumberET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="112dp"
             android:ems="5"
             android:inputType="numberDecimal"
             android:maxLength="10"
             android:textSize="19sp"
             app:layout_constraintBottom_toBottomOf="@+id/hpTV"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toEndOf="@+id/hpTV"
             app:layout_constraintTop_toTopOf="@+id/hpTV" />
 
         <EditText
@@ -171,7 +163,7 @@
             android:maxLength="10"
             android:textSize="19sp"
             app:layout_constraintBottom_toBottomOf="@+id/oxygenTV"
-            app:layout_constraintStart_toStartOf="@+id/guideline" />
+            app:layout_constraintStart_toStartOf="@+id/staminaNumberET" />
 
         <EditText
             android:id="@+id/foodNumberET"
@@ -182,7 +174,7 @@
             android:maxLength="10"
             android:textSize="19sp"
             app:layout_constraintBottom_toBottomOf="@+id/foodTV"
-            app:layout_constraintStart_toStartOf="@+id/guideline" />
+            app:layout_constraintStart_toStartOf="@+id/oxygenNumberET" />
 
         <EditText
             android:id="@+id/weightNumberET"
@@ -193,7 +185,7 @@
             android:maxLength="10"
             android:textSize="19sp"
             app:layout_constraintBottom_toBottomOf="@+id/weightTV"
-            app:layout_constraintStart_toStartOf="@+id/guideline" />
+            app:layout_constraintStart_toStartOf="@+id/foodNumberET" />
 
         <EditText
             android:id="@+id/damageNumberET"
@@ -204,7 +196,7 @@
             android:maxLength="10"
             android:textSize="19sp"
             app:layout_constraintBottom_toBottomOf="@+id/damageTV"
-            app:layout_constraintStart_toStartOf="@+id/guideline" />
+            app:layout_constraintStart_toStartOf="@+id/weightNumberET" />
 
         <EditText
             android:id="@+id/speedNumberET"
@@ -215,7 +207,7 @@
             android:maxLength="10"
             android:textSize="19sp"
             app:layout_constraintBottom_toBottomOf="@+id/speedTV"
-            app:layout_constraintStart_toStartOf="@+id/guideline" />
+            app:layout_constraintStart_toStartOf="@+id/damageNumberET" />
 
         <EditText
             android:id="@+id/torpidityNumberET"
@@ -226,7 +218,7 @@
             android:maxLength="10"
             android:textSize="19sp"
             app:layout_constraintBottom_toBottomOf="@+id/torpidityTV"
-            app:layout_constraintStart_toStartOf="@+id/guideline" />
+            app:layout_constraintStart_toStartOf="@+id/speedNumberET" />
 
         <EditText
             android:id="@+id/staminaNumberET"
@@ -237,7 +229,7 @@
             android:maxLength="10"
             android:textSize="19sp"
             app:layout_constraintBottom_toBottomOf="@+id/staminaTV"
-            app:layout_constraintStart_toStartOf="@+id/guideline" />
+            app:layout_constraintStart_toStartOf="@+id/hpNumberET" />
 
         <TextView
             android:id="@+id/hpPoints"
@@ -320,22 +312,21 @@
             android:id="@+id/lvlET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
             android:ems="4"
             android:hint="@string/level"
             android:inputType="number"
             android:maxLength="4"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="@+id/hpNumberET"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline4" />
 
         <RadioGroup
             android:id="@+id/statusRG"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="42dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline4"
             app:layout_constraintTop_toBottomOf="@+id/lvlET">
 
             <RadioButton
@@ -379,7 +370,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="182dp" />
+            app:layout_constraintGuide_begin="100dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"
@@ -420,6 +411,13 @@
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/effectET"
             app:layout_constraintTop_toBottomOf="@+id/effectET" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="150dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
