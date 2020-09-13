@@ -9,12 +9,15 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.get
 import com.example.arkdinostats.R
 import com.example.arkdinostats.model.Dino
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        MobileAds.initialize(this) {}
 
         supportFragmentManager.beginTransaction().replace(
             R.id.fragmentContainer,

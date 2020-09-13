@@ -1,10 +1,10 @@
-package com.example.arkdinostats
+package com.example.arkdinostats.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import com.example.arkdinostats.ui.MainActivity
+import com.example.arkdinostats.R
 
 class SplashActivity : AppCompatActivity() {
     internal val TIME_OUT = 1500

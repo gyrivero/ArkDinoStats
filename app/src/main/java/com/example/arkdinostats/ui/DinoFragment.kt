@@ -1,5 +1,6 @@
 package com.example.arkdinostats.ui
 
+import android.app.ActionBar
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -36,8 +37,6 @@ class DinoFragment : Fragment()  {
         val view = inflater.inflate(R.layout.fragment_item_list, container, false)
         setHasOptionsMenu(true)
 
-
-
         val dinoList = createDinos(Utils.jsonParse("values.json"))
 
 
@@ -62,6 +61,7 @@ class DinoFragment : Fragment()  {
             }
         }
         return view
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

@@ -386,10 +386,13 @@
 
         <Button
             android:id="@+id/checkBtn"
+            style="@style/Widget.AppCompat.Button"
             android:layout_width="70dp"
             android:layout_height="35dp"
             android:layout_marginTop="8dp"
+            android:background="?attr/colorButtonNormal"
             android:text="@string/checkBtn"
+            android:backgroundTint="@color/button"
             android:textSize="6sp"
             app:layout_constraintStart_toStartOf="@+id/averageTV"
             app:layout_constraintTop_toBottomOf="@+id/imprintET" />

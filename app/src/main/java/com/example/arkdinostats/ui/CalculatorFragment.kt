@@ -10,14 +10,17 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.example.arkdinostats.R
 import com.example.arkdinostats.model.Dino
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
 import kotlinx.android.synthetic.main.fragment_calculator.*
 import kotlinx.android.synthetic.main.fragment_calculator.view.*
-import kotlin.math.log
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "dino"
 private const val ARG_PARAM2 = "param2"
+private lateinit var mInterstitialAd: InterstitialAd
 
 class CalculatorFragment : Fragment() {
     // TODO: Rename and change types of parameters
@@ -31,6 +34,15 @@ class CalculatorFragment : Fragment() {
         arguments?.let {
             param1 = it.getSerializable(ARG_PARAM1) as Dino?
             param2 = it.getString(ARG_PARAM2)
+
+            mInterstitialAd = InterstitialAd(activity)
+            mInterstitialAd.adUnitId = "ca-app-pub-3940256099942544/1033173712"
+            mInterstitialAd.loadAd(AdRequest.Builder().build())
+            mInterstitialAd.adListener = object : AdListener() {
+                override fun onAdClosed() {
+                    mInterstitialAd.loadAd(AdRequest.Builder().build())
+                }
+            }
         }
     }
 
@@ -40,6 +52,8 @@ class CalculatorFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_calculator, container, false)
+        view.averageTV.setTextColor(resources.getColor(android.R.color.black,null))
+        view.constraintLayout.setBackgroundColor(resources.getColor(R.color.background,null))
 
         actualDino = param1!!
         view.effectET.visibility=View.GONE
@@ -81,13 +95,18 @@ class CalculatorFragment : Fragment() {
             } else {
                 average = view.lvlET.text.toString().toInt()
                 if (actualDino.name.contains("Astrocetus")) {
-                    average = (average-1)/6
+                    average = (average - 1) / 6
                 } else {
-                    average = (average-1)/7
+                    average = (average - 1) / 7
                 }
                 view.averageTV.setText(getString(R.string.average) + average)
                 checkPoints()
                 checkStats()
+                if (mInterstitialAd.isLoaded) {
+                    mInterstitialAd.show()
+                } else {
+                    Toast.makeText(activity, "Doesn't loaded", Toast.LENGTH_SHORT).show()
+                }
             }
         })
 
@@ -109,7 +128,6 @@ class CalculatorFragment : Fragment() {
             hpPoints.text
         }
     }
-
 
     private fun checkStats() {
         if (hpNumberET.text.isNullOrEmpty()) {
@@ -240,6 +258,7 @@ class CalculatorFragment : Fragment() {
         for (i in 0..600) {
             val resultValue =  (b* (1+i*iw*1)*tbhm*ibf+ta*taMCopy)*tmf
             val range = v-1..v+1
+            Log.i("Breed", "$resultValue")
             if (resultValue in range) {
                 calculateOK = true
             }
@@ -281,6 +300,7 @@ class CalculatorFragment : Fragment() {
         for (i in 0..600) {
             val resultValue =  (b* (1+i*iw*1)*ibf+ta*taMCopy)*tmf
             val range = v-1..v+1
+            Log.i("Breed", "$resultValue")
             if (resultValue in range) {
                 calculateOK = true
             }
@@ -322,6 +342,7 @@ class CalculatorFragment : Fragment() {
         for (i in 0..600) {
             val resultValue =  (b* (1+i*iw*1)*tbhm+ta*taMCopy)*tmf
             val range = v-1..v+1
+            Log.i("Tamed", "$resultValue")
             if (resultValue in range) {
                 calculateOk = true
             }
@@ -359,9 +380,10 @@ class CalculatorFragment : Fragment() {
 
         var calculateOK = false
 
-        for (i in 0..100) {
+        for (i in 0..500) {
             val resultValue =  (b* (1+i*iw*1)+ta*taMCopy)*tmf
             val range = v-1..v+1
+            Log.i("Tamed", "$resultValue")
             if (resultValue in range) {
                 calculateOK = true
             }
@@ -393,9 +415,9 @@ class CalculatorFragment : Fragment() {
         } else {
             pointsTV!!.setText(points.toString())
             when {
-                points in (average-(average/10))..(average+(average/10)) -> pointsTV.setBackgroundColor(resources.getColor(R.color.colorAccent,null))
-                points < average-(average/10) -> pointsTV.setBackgroundColor(resources.getColor(R.color.colorPrimary,null))
-                points > average+(average/10) -> pointsTV.setBackgroundColor(resources.getColor(R.color.colorPrimaryDark,null))
+                points in (average-(average/10))..(average+(average/10)) -> pointsTV.setTextColor(resources.getColor(R.color.average,null))
+                points < average-(average/10) -> pointsTV.setTextColor(resources.getColor(R.color.belowAverage,null))
+                points > average+(average/10) -> pointsTV.setTextColor(resources.getColor(R.color.overAverage,null))
             }
         }
     }
@@ -416,9 +438,10 @@ class CalculatorFragment : Fragment() {
 
         var calculateOK = false
 
-        for (i in 0..100) {
+        for (i in 0..500) {
             val resultValue = b* (1+i*iw*1)
             val range = v-1..v+1
+            Log.i("Wild", "$resultValue")
             if (resultValue in range) {
                 calculateOK = true
             }

@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorPrimary">#7EDEEA</color>
+    <color name="colorPrimaryDark">#48ACB8</color>
+    <color name="colorAccent">#48ACB8</color>
+    <color name="belowAverage">#FF7E1F</color>
+    <color name="average">#004EFF</color>
+    <color name="overAverage">#4CDA3B</color>
+    <color name="background">#F0F5F5</color>
+    <color name="grey">#CCCCCC</color>
 </resources>
