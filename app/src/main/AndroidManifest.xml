@@ -2,9 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.arkdinostats">
 
-    <supports-screens
-        android:requiresSmallestWidthDp="320"
-        />
+    <supports-screens android:requiresSmallestWidthDp="320" />
 
     <application
         android:name=".common.MyApp"
@@ -14,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity"
+        <activity android:name=".ui.SavedDinoActivity" />
+        <activity
+            android:name=".ui.MainActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

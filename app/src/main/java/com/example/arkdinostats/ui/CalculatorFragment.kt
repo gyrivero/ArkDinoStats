@@ -1,6 +1,7 @@
 package com.example.arkdinostats.ui
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
@@ -18,7 +19,6 @@ import kotlinx.android.synthetic.main.fragment_calculator.view.*
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "dino"
 private const val ARG_PARAM2 = "param2"
-private lateinit var viewModel: SavedDinosViewModel
 var pointsHP : Int = 0
 var pointsStamina : Int = 0
 var pointsWeight : Int = 0
@@ -27,7 +27,9 @@ var pointsSpeed : Int = 0
 var pointsOxygen : Int = 0
 var pointsFood : Int = 0
 var pointsTorpidity : Int = 0
+var wastedPoint : Int = 0
 var isValuesOk = false
+var checked = false
 
 class CalculatorFragment : Fragment() {
     // TODO: Rename and change types of parameters
@@ -38,7 +40,6 @@ class CalculatorFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(activity!!).get(SavedDinosViewModel::class.java)
         arguments?.let {
             param1 = it.getSerializable(ARG_PARAM1) as Dino?
             param2 = it.getString(ARG_PARAM2)
@@ -51,6 +52,7 @@ class CalculatorFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_calculator, container, false)
+        setHasOptionsMenu(true)
 
         actualDino = param1!!
         view.effectET.visibility=View.GONE
@@ -191,16 +193,19 @@ class CalculatorFragment : Fragment() {
 
         val totalPoints = pointsDamage+pointsHP+pointsFood+pointsOxygen+pointsSpeed+pointsStamina+pointsWeight
         isValuesOk = checkValues(totalPoints,pointsTorpidity,lvlET.text.toString().toInt())
-        val wastedPoints = pointsTorpidity - totalPoints
-        checkQuality(hpPoints,pointsHP,isValuesOk,wastedPoints)
-        checkQuality(staminaPoints,pointsStamina,isValuesOk,wastedPoints)
-        checkQuality(weigthPoints,pointsWeight,isValuesOk,wastedPoints)
-        checkQuality(damagePoints,pointsDamage,isValuesOk,wastedPoints)
-        checkQuality(speedPoints,pointsSpeed,isValuesOk,wastedPoints)
-        checkQuality(oxygenPoints,pointsOxygen,isValuesOk,wastedPoints)
-        checkQuality(foodPoints,pointsFood,isValuesOk,wastedPoints)
+        wastedPoint = pointsTorpidity - totalPoints
+        checkQuality(hpPoints,pointsHP,isValuesOk,wastedPoint)
+        checkQuality(staminaPoints,pointsStamina,isValuesOk,wastedPoint)
+        checkQuality(weigthPoints,pointsWeight,isValuesOk,wastedPoint)
+        checkQuality(damagePoints,pointsDamage,isValuesOk,wastedPoint)
+        checkQuality(speedPoints,pointsSpeed,isValuesOk,wastedPoint)
+        checkQuality(oxygenPoints,pointsOxygen,isValuesOk,wastedPoint)
+        checkQuality(foodPoints,pointsFood,isValuesOk,wastedPoint)
         if (!isValuesOk) {
             showDialog()
+            checked = false
+        } else {
+            checked = true
         }
 
     }
@@ -422,10 +427,23 @@ class CalculatorFragment : Fragment() {
         builder!!.setMessage(getString(R.string.add_dialog_message))
             .setTitle(getString(R.string.adding))
             .setCancelable(false)
-            .setPositiveButton("Yes", DialogInterface.OnClickListener{dialog, which -> viewModel.insert(
-                DinoEntity(actualDino.name,actualDino.image,null, pointsHP, pointsStamina,
-                    pointsOxygen, pointsFood, pointsWeight, pointsDamage, pointsSpeed)
-            ) })
+            .setPositiveButton("Yes", DialogInterface.OnClickListener{dialog, which ->
+                val bundle = Bundle()
+                bundle.putInt("image",actualDino.image)
+                bundle.putInt("hp", pointsHP)
+                bundle.putInt("stamina", pointsStamina)
+                bundle.putInt("oxygen", pointsOxygen)
+                bundle.putInt("food", pointsFood)
+                bundle.putInt("weight", pointsWeight)
+                bundle.putInt("damage", pointsDamage)
+                bundle.putInt("speed", pointsSpeed)
+                bundle.putString("name",actualDino.name)
+                bundle.putInt("lvl",lvlET.text.toString().toInt())
+                bundle.putInt("wasted", wastedPoint)
+                val intent = Intent(activity,SavedDinoActivity::class.java)
+                intent.putExtra("dino",bundle)
+                startActivity(intent)
+            })
             .setNegativeButton("No", DialogInterface.OnClickListener{dialog, which -> dialog.dismiss() })
         val dialog: AlertDialog? = builder.create()
         dialog!!.show()
@@ -455,7 +473,7 @@ class CalculatorFragment : Fragment() {
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.dino_add) {
+        if (item.itemId == R.id.dino_add && checked) {
             showAddDialog()
             return true
         } else {

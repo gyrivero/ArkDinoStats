@@ -3,6 +3,7 @@ package com.example.arkdinostats.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.arkdinostats.db.DinoRoomDatabase
 import com.example.arkdinostats.db.entity.DinoEntity
@@ -13,11 +14,16 @@ import kotlinx.coroutines.launch
 class SavedDinosViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: DinoRepository
     val allDinos: LiveData<List<DinoEntity>>
+    private val filterDino = MutableLiveData<List<DinoEntity>>()
 
     init {
         val dinoDao = DinoRoomDatabase.getDatabase(application).dinoDao()
         repository = DinoRepository(dinoDao)
         allDinos = repository.allDinos
+    }
+
+    fun getDinosFiltered(): MutableLiveData<List<DinoEntity>> {
+        return filterDino
     }
 
     fun insert(dino: DinoEntity) = viewModelScope.launch(Dispatchers.IO) {
@@ -33,6 +39,6 @@ class SavedDinosViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     fun getDinosByName(name: String) = viewModelScope.launch(Dispatchers.IO) {
-        repository.getDinosByNameOrderASC(name)
+        filterDino.postValue(repository.getDinosByNameOrderASC(name))
     }
 }

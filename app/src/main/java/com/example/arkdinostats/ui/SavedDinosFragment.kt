@@ -1,20 +1,21 @@
 package com.example.arkdinostats.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.arkdinostats.R
+import com.example.arkdinostats.db.entity.DinoEntity
+import com.example.arkdinostats.model.Dino
 import com.example.arkdinostats.viewmodel.SavedDinosViewModel
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class SavedDinosFragment : Fragment() {
     private lateinit var dinoAdapter: SavedDinoRecyclerViewAdapter
-    private lateinit var dinoViewModel: SavedDinosViewModel
 
     companion object {
         fun newInstance() = SavedDinosFragment()
@@ -32,6 +33,21 @@ class SavedDinosFragment : Fragment() {
 
 
         val view  = inflater.inflate(R.layout.fragment_saved_dino_list, container, false)
+        val searchView : SearchView = activity!!.findViewById(R.id.dinoSearch)
+        setHasOptionsMenu(true)
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                dinoAdapter.filter(query!!)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                dinoAdapter.filter(newText!!)
+                return true
+            }
+
+        })
 
         dinoAdapter = SavedDinoRecyclerViewAdapter(context)
         loadDinos()
@@ -48,6 +64,19 @@ class SavedDinosFragment : Fragment() {
 
     private fun loadDinos() {
         viewModel.allDinos.observe(activity!!, Observer { it -> it?.let { dinoAdapter.setDinos(it) } })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_db, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.delete_all) {
+            viewModel.deleteAll()
+            return true
+        } else {
+            return super.onOptionsItemSelected(item)
+        }
     }
 
 }

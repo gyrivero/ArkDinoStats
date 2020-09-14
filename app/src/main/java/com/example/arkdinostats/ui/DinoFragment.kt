@@ -1,5 +1,6 @@
 package com.example.arkdinostats.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -67,9 +68,21 @@ class DinoFragment : Fragment()  {
         inflater.inflate(R.menu.menu, menu)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.open_db) {
+            val intent = Intent(activity,SavedDinoActivity::class.java)
+            startActivity(intent)
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun onPrepareOptionsMenu(menu: Menu) {
         val menuItem : MenuItem = menu.findItem(R.id.dino_search)
         val searchView = menuItem.actionView as SearchView
+        val openDBItem : MenuItem = menu.findItem(R.id.open_db)
+
+
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {

@@ -7,7 +7,7 @@ import com.example.arkdinostats.db.entity.DinoEntity
 class DinoRepository(private val dinoDao: DinoDao) {
     val allDinos: LiveData<List<DinoEntity>> = dinoDao.getDinosOrderASC()
 
-    fun getDinosByNameOrderASC(name: String): LiveData<List<DinoEntity>> {
+    fun getDinosByNameOrderASC(name: String): List<DinoEntity> {
         return dinoDao.getDinosByNameOrderASC(name)
     }
 

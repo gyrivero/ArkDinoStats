@@ -21,5 +21,5 @@ interface DinoDao {
     suspend fun deleteAll()
 
     @Query("SELECT * FROM dinos WHERE name = :name")
-    fun getDinosByNameOrderASC(name: String): LiveData<List<DinoEntity>>
+    fun getDinosByNameOrderASC(name: String): List<DinoEntity>
 }

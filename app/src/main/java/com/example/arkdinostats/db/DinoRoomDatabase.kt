@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.arkdinostats.db.dao.DinoDao
 import com.example.arkdinostats.db.entity.DinoEntity
+import kotlinx.coroutines.CoroutineScope
 
 @Database(entities = arrayOf(DinoEntity::class),version = 1,exportSchema = false)
 public abstract class DinoRoomDatabase : RoomDatabase() {

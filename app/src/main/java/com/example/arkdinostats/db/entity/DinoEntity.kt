@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 class DinoEntity(
     val name: String,
     val image: Int,
+    val lvl: Int,
     @PrimaryKey(autoGenerate = true) var id: Int? = null,
     val hpPoints: Int,
     val staminaPoints: Int,
@@ -14,6 +15,7 @@ class DinoEntity(
     val foodPoints: Int,
     val weightPoints: Int,
     val damagePoints: Int,
+    val wastedPoints: Int,
     val speedPoints: Int
 ) {
 
