@@ -1,4 +1,4 @@
-package com.example.arkdinostats.ui
+package com.com.cloudfoxgames.jerboapp.ui
 
 import android.app.ActionBar
 import android.os.Bundle
@@ -10,11 +10,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.appcompat.widget.SearchView
-import com.example.arkdinostats.common.MyApp
-import com.example.arkdinostats.model.Dino
-import com.example.arkdinostats.R
-import com.example.arkdinostats.common.Utils
-import com.example.arkdinostats.model.JsonDino
+import com.cloudfoxgames.jerboapp.common.MyApp
+import com.cloudfoxgames.jerboapp.model.Dino
+import com.cloudfoxgames.jerboapp.R
+import com.cloudfoxgames.jerboapp.common.Utils
+import com.cloudfoxgames.jerboapp.model.JsonDino
+import com.cloudfoxgames.jerboapp.ui.DinoRecyclerViewAdapter
 import java.lang.NullPointerException
 
 class DinoFragment : Fragment()  {

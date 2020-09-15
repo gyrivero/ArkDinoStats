@@ -1,4 +1,4 @@
-package com.example.arkdinostats.ui
+package com.cloudfoxgames.jerboapp.ui
 
 import android.content.DialogInterface
 import android.os.Bundle
@@ -8,8 +8,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import com.example.arkdinostats.R
-import com.example.arkdinostats.model.Dino
+import com.cloudfoxgames.jerboapp.R
+import com.cloudfoxgames.jerboapp.model.Dino
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
@@ -36,7 +36,7 @@ class CalculatorFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
 
             mInterstitialAd = InterstitialAd(activity)
-            mInterstitialAd.adUnitId = "ca-app-pub-3940256099942544/1033173712"
+            mInterstitialAd.adUnitId = "ca-app-pub-3829761967318508/6486275931"
             mInterstitialAd.loadAd(AdRequest.Builder().build())
             mInterstitialAd.adListener = object : AdListener() {
                 override fun onAdClosed() {

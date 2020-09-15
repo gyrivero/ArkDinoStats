@@ -1,4 +1,4 @@
-package com.example.arkdinostats
+package com.example.jerboapp
 
 import org.junit.Test
 

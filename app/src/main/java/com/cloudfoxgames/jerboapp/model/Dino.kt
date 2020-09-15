@@ -1,4 +1,4 @@
-package com.example.arkdinostats.model
+package com.cloudfoxgames.jerboapp.model
 
 import java.io.Serializable
 

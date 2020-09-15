@@ -1,4 +1,4 @@
-package com.example.arkdinostats.common
+package com.cloudfoxgames.jerboapp.common
 
 import android.app.Application
 

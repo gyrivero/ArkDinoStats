@@ -1,10 +1,10 @@
-package com.example.arkdinostats.ui
+package com.cloudfoxgames.jerboapp.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import com.example.arkdinostats.R
+import com.cloudfoxgames.jerboapp.R
 
 class SplashActivity : AppCompatActivity() {
     internal val TIME_OUT = 1500

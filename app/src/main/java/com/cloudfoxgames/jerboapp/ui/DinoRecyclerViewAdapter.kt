@@ -1,4 +1,4 @@
-package com.example.arkdinostats.ui
+package com.cloudfoxgames.jerboapp.ui
 
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -17,8 +17,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
-import com.example.arkdinostats.model.Dino
-import com.example.arkdinostats.R
+import com.cloudfoxgames.jerboapp.R
+import com.cloudfoxgames.jerboapp.model.Dino
 
 class DinoRecyclerViewAdapter(
     var values: MutableList<Dino>,

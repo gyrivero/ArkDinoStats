@@ -1,7 +1,7 @@
-package com.example.arkdinostats.common
+package com.cloudfoxgames.jerboapp.common
 
 import android.content.Context
-import com.example.arkdinostats.model.JsonDino
+import com.cloudfoxgames.jerboapp.model.JsonDino
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.IOException

@@ -1,4 +1,4 @@
-package com.example.arkdinostats.ui
+package com.cloudfoxgames.jerboapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,8 +7,9 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.get
-import com.example.arkdinostats.R
-import com.example.arkdinostats.model.Dino
+import com.cloudfoxgames.jerboapp.R
+import com.cloudfoxgames.jerboapp.model.Dino
+import com.com.cloudfoxgames.jerboapp.ui.DinoFragment
 import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_main.*
 
