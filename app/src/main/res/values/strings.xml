@@ -31,7 +31,7 @@
     <string name="damage_nedeed">Please indicate the Damage Points</string>
     <string name="speed_nedeed">Please indicate the Speed Points</string>
     <string name="torpidity_nedeed">Please indicate the Torpidity Points</string>
-    <string name="stats_error_dialog_message">Something went wrong. Check the data.</string>
+    <string name="stats_error_dialog_message">Something went wrong. Check the data. Remember that if you leveled up any stat of your Dino, it won\'t work!</string>
     <string name="error">Error</string>
     <string name="ok">Ok</string>
 </resources>

@@ -31,7 +31,7 @@
     <string name="damage_nedeed">Por favor, indica los Puntos de Daño</string>
     <string name="speed_nedeed">Por favor, indica los Puntos de Velocidad</string>
     <string name="torpidity_nedeed">Por favor, indica los Puntos de Inconsciencia</string>
-    <string name="stats_error_dialog_message">Algo ha salido mal. Revisa la informacion.</string>
+    <string name="stats_error_dialog_message">Algo ha salido mal. Revisa la informacion. Recorda que si le asignaste algún punto de nivel a tu dino, no va a funcionar!</string>
     <string name="error">Error</string>
     <string name="ok">Aceptar</string>
 </resources>

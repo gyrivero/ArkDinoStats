@@ -145,11 +145,6 @@ class DinoFragment : Fragment()  {
                 }
             }
         }
-        Toast.makeText(
-            MyApp.instance,
-            "Dinos cargados. Normal: ${list.size}. Repetidos: $repetead",
-            Toast.LENGTH_SHORT
-        ).show()
         list.sortBy { dino -> dino.aberrantTek }
         return list
     }

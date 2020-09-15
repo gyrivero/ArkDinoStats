@@ -258,7 +258,6 @@ class CalculatorFragment : Fragment() {
         for (i in 0..600) {
             val resultValue =  (b* (1+i*iw*1)*tbhm*ibf+ta*taMCopy)*tmf
             val range = v-1..v+1
-            Log.i("Breed", "$resultValue")
             if (resultValue in range) {
                 calculateOK = true
             }
@@ -300,7 +299,6 @@ class CalculatorFragment : Fragment() {
         for (i in 0..600) {
             val resultValue =  (b* (1+i*iw*1)*ibf+ta*taMCopy)*tmf
             val range = v-1..v+1
-            Log.i("Breed", "$resultValue")
             if (resultValue in range) {
                 calculateOK = true
             }
@@ -342,7 +340,6 @@ class CalculatorFragment : Fragment() {
         for (i in 0..600) {
             val resultValue =  (b* (1+i*iw*1)*tbhm+ta*taMCopy)*tmf
             val range = v-1..v+1
-            Log.i("Tamed", "$resultValue")
             if (resultValue in range) {
                 calculateOk = true
             }
@@ -383,7 +380,6 @@ class CalculatorFragment : Fragment() {
         for (i in 0..500) {
             val resultValue =  (b* (1+i*iw*1)+ta*taMCopy)*tmf
             val range = v-1..v+1
-            Log.i("Tamed", "$resultValue")
             if (resultValue in range) {
                 calculateOK = true
             }
@@ -441,7 +437,6 @@ class CalculatorFragment : Fragment() {
         for (i in 0..500) {
             val resultValue = b* (1+i*iw*1)
             val range = v-1..v+1
-            Log.i("Wild", "$resultValue")
             if (resultValue in range) {
                 calculateOK = true
             }
