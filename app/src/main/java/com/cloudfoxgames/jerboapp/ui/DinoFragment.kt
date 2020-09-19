@@ -24,6 +24,7 @@ class DinoFragment : Fragment()  {
     private var columnCount = 3
     private lateinit var dinoAdapter : DinoRecyclerViewAdapter
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

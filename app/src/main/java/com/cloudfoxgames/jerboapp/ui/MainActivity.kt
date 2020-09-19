@@ -9,7 +9,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.get
 import com.cloudfoxgames.jerboapp.R
 import com.cloudfoxgames.jerboapp.model.Dino
-import com.com.cloudfoxgames.jerboapp.ui.DinoFragment
+import com.cloudfoxgames.jerboapp.ui.DinoFragment
 import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_main.*
 

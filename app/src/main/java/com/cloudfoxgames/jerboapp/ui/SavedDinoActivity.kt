@@ -10,6 +10,12 @@ import kotlinx.android.synthetic.main.fragment_calculator.*
 
 class SavedDinoActivity : AppCompatActivity() {
     private lateinit var viewModel : SavedDinosViewModel
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean("new",false)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_saved_dino)
@@ -20,12 +26,21 @@ class SavedDinoActivity : AppCompatActivity() {
         ).commit()
 
         viewModel = ViewModelProvider(this).get(SavedDinosViewModel::class.java)
-        val bundle = intent.getBundleExtra("dino")
-        if (bundle != null) {
-            viewModel.insert(DinoEntity(bundle.getString("name")!!, bundle.getString("type")!!,bundle.getInt("image"),
-                bundle.getInt("lvl"),null,bundle.getInt("hp"),bundle.getInt("stamina"),bundle.getInt("oxygen"),
-                bundle.getInt("food"),bundle.getInt("weight"),bundle.getInt("damage"),bundle.getInt("wasted"),
-                bundle.getInt("speed")))
+
+        var new = true
+
+        if (savedInstanceState != null) {
+            new = savedInstanceState.getBoolean("new")
+        }
+
+        if (new) {
+            val bundle = intent.getBundleExtra("dino")
+            if (bundle != null) {
+                viewModel.insert(DinoEntity(bundle.getString("name")!!, bundle.getString("type")!!,bundle.getInt("image"),
+                    bundle.getInt("lvl"),null,bundle.getInt("hp"),bundle.getInt("stamina"),bundle.getInt("oxygen"),
+                    bundle.getInt("food"),bundle.getInt("weight"),bundle.getInt("damage"),bundle.getInt("wasted"),
+                    bundle.getInt("speed")))
+            }
         }
     }
 }
