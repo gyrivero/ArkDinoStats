@@ -3,9 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/dino_search"
-        android:title="Search"
+        android:title="@string/search"
         android:icon="@drawable/ic_baseline_search_24"
         app:showAsAction="always|collapseActionView"
         app:actionViewClass="androidx.appcompat.widget.SearchView"/>
+    <item
+        android:id="@+id/open_db"
+        android:icon="@drawable/ic_baseline_storage_24"
+        app:showAsAction="always|collapseActionView"
+        android:title="Open DB" />
 
 </menu>

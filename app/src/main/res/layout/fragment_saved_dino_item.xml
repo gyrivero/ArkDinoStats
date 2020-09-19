@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+
+    <ImageView
+        android:id="@+id/dinoIV"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
+
+    <TextView
+        android:id="@+id/dinoNameTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:maxWidth="55dp"
+        android:singleLine="false"
+        android:text="Parasaurio"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/lvlTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="340"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/healthPointsTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="86"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/energyPointsTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="86"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/oxygenPointsTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="86"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/foodPointsTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="86"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/weightPointsTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="86"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/damagePointsTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="86"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/speedPointsTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="86"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/wastedPointsTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="86"
+        android:textAlignment="center" />
+
+</LinearLayout>

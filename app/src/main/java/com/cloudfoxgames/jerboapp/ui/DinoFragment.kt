@@ -1,15 +1,16 @@
-package com.com.cloudfoxgames.jerboapp.ui
+package com.cloudfoxgames.jerboapp.ui
 
 import android.app.ActionBar
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.appcompat.widget.SearchView
 import com.cloudfoxgames.jerboapp.common.MyApp
 import com.cloudfoxgames.jerboapp.model.Dino
 import com.cloudfoxgames.jerboapp.R
@@ -67,6 +68,15 @@ class DinoFragment : Fragment()  {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.open_db) {
+            val intent = Intent(activity,SavedDinoActivity::class.java)
+            startActivity(intent)
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
