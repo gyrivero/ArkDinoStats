@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.example.arkdinostats.db.entity.DinoEntity
 
 @Dao
@@ -20,6 +21,6 @@ interface DinoDao {
     @Query("DELETE FROM dinos")
     suspend fun deleteAll()
 
-    @Query("SELECT * FROM dinos WHERE name = :name")
-    fun getDinosByNameOrderASC(name: String): List<DinoEntity>
+    @Update
+    suspend fun update(dino: DinoEntity)
 }

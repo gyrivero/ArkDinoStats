@@ -22,23 +22,10 @@ class SavedDinoActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(SavedDinosViewModel::class.java)
         val bundle = intent.getBundleExtra("dino")
         if (bundle != null) {
-            viewModel.insert(DinoEntity(bundle.getString("name")!!,bundle.getInt("image"),bundle.getInt("lvl"),
-                null,bundle.getInt("hp"),bundle.getInt("stamina"),bundle.getInt("oxygen"),bundle.getInt("food"),
-            bundle.getInt("weight"),bundle.getInt("damage"),bundle.getInt("wasted"),bundle.getInt("speed")))
+            viewModel.insert(DinoEntity(bundle.getString("name")!!, bundle.getString("type")!!,bundle.getInt("image"),
+                bundle.getInt("lvl"),null,bundle.getInt("hp"),bundle.getInt("stamina"),bundle.getInt("oxygen"),
+                bundle.getInt("food"),bundle.getInt("weight"),bundle.getInt("damage"),bundle.getInt("wasted"),
+                bundle.getInt("speed")))
         }
-
-        /*bundle.putInt("image",actualDino.image)
-        bundle.putInt("hp", pointsHP)
-        bundle.putInt("stamina", pointsStamina)
-        bundle.putInt("oxygen", pointsOxygen)
-        bundle.putInt("food", pointsFood)
-        bundle.putInt("weight", pointsWeight)
-        bundle.putInt("damage", pointsDamage)
-        bundle.putInt("speed", pointsSpeed)
-        bundle.putString("name",actualDino.name)
-        bundle.putString("lvl",lvlET.text.toString())*/
-
-
-
     }
 }

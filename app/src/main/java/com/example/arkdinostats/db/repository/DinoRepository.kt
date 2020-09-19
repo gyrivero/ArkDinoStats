@@ -7,10 +7,6 @@ import com.example.arkdinostats.db.entity.DinoEntity
 class DinoRepository(private val dinoDao: DinoDao) {
     val allDinos: LiveData<List<DinoEntity>> = dinoDao.getDinosOrderASC()
 
-    fun getDinosByNameOrderASC(name: String): List<DinoEntity> {
-        return dinoDao.getDinosByNameOrderASC(name)
-    }
-
     suspend fun insert(dino: DinoEntity) {
         dinoDao.insert(dino)
     }
@@ -21,5 +17,9 @@ class DinoRepository(private val dinoDao: DinoDao) {
 
     suspend fun deleteById(idDino : Int) {
         dinoDao.deleteById(idDino)
+    }
+
+    suspend fun update(dino: DinoEntity) {
+        dinoDao.update(dino)
     }
 }

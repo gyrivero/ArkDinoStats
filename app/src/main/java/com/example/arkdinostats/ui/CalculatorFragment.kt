@@ -1,17 +1,13 @@
 package com.example.arkdinostats.ui
 
 import android.content.DialogInterface
-import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.arkdinostats.R
-import com.example.arkdinostats.db.entity.DinoEntity
 import com.example.arkdinostats.model.Dino
-import com.example.arkdinostats.viewmodel.SavedDinosViewModel
 import kotlinx.android.synthetic.main.fragment_calculator.*
 import kotlinx.android.synthetic.main.fragment_calculator.view.*
 
@@ -421,32 +417,21 @@ class CalculatorFragment : Fragment() {
     }
 
     private fun showAddDialog() {
-        val builder: AlertDialog.Builder? = activity?.let {
-            AlertDialog.Builder(it)
-        }
-        builder!!.setMessage(getString(R.string.add_dialog_message))
-            .setTitle(getString(R.string.adding))
-            .setCancelable(false)
-            .setPositiveButton("Yes", DialogInterface.OnClickListener{dialog, which ->
-                val bundle = Bundle()
-                bundle.putInt("image",actualDino.image)
-                bundle.putInt("hp", pointsHP)
-                bundle.putInt("stamina", pointsStamina)
-                bundle.putInt("oxygen", pointsOxygen)
-                bundle.putInt("food", pointsFood)
-                bundle.putInt("weight", pointsWeight)
-                bundle.putInt("damage", pointsDamage)
-                bundle.putInt("speed", pointsSpeed)
-                bundle.putString("name",actualDino.name)
-                bundle.putInt("lvl",lvlET.text.toString().toInt())
-                bundle.putInt("wasted", wastedPoint)
-                val intent = Intent(activity,SavedDinoActivity::class.java)
-                intent.putExtra("dino",bundle)
-                startActivity(intent)
-            })
-            .setNegativeButton("No", DialogInterface.OnClickListener{dialog, which -> dialog.dismiss() })
-        val dialog: AlertDialog? = builder.create()
-        dialog!!.show()
+        val bundle = Bundle()
+        bundle.putInt("image",actualDino.image)
+        bundle.putInt("hp", pointsHP)
+        bundle.putInt("stamina", pointsStamina)
+        bundle.putInt("oxygen", pointsOxygen)
+        bundle.putInt("food", pointsFood)
+        bundle.putInt("weight", pointsWeight)
+        bundle.putInt("damage", pointsDamage)
+        bundle.putInt("speed", pointsSpeed)
+        bundle.putInt("lvl",lvlET.text.toString().toInt())
+        bundle.putInt("wasted", wastedPoint)
+        bundle.putString("type",actualDino.name)
+
+        val newFragment = CustomDialogFragment(bundle,1)
+        newFragment.show(activity!!.supportFragmentManager,"dialog")
     }
 
     private fun calculateWild(v: Float, b: Float, iw: Float): Int {

@@ -2,17 +2,12 @@ package com.example.arkdinostats.ui
 
 import android.os.Bundle
 import android.view.*
-import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.arkdinostats.R
-import com.example.arkdinostats.db.entity.DinoEntity
-import com.example.arkdinostats.model.Dino
 import com.example.arkdinostats.viewmodel.SavedDinosViewModel
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class SavedDinosFragment : Fragment() {
     private lateinit var dinoAdapter: SavedDinoRecyclerViewAdapter
@@ -28,26 +23,14 @@ class SavedDinosFragment : Fragment() {
         viewModel = ViewModelProvider(activity!!).get(SavedDinosViewModel::class.java)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
 
-        val view  = inflater.inflate(R.layout.fragment_saved_dino_list, container, false)
-        val searchView : SearchView = activity!!.findViewById(R.id.dinoSearch)
+        val view = inflater.inflate(R.layout.fragment_saved_dino_list, container, false)
         setHasOptionsMenu(true)
-
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                dinoAdapter.filter(query!!)
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                dinoAdapter.filter(newText!!)
-                return true
-            }
-
-        })
 
         dinoAdapter = SavedDinoRecyclerViewAdapter(context)
         loadDinos()
@@ -63,7 +46,9 @@ class SavedDinosFragment : Fragment() {
     }
 
     private fun loadDinos() {
-        viewModel.allDinos.observe(activity!!, Observer { it -> it?.let { dinoAdapter.setDinos(it) } })
+        viewModel.allDinos.observe(
+            activity!!,
+            Observer { it -> it?.let { dinoAdapter.setDinos(it) } })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -71,12 +56,33 @@ class SavedDinosFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.delete_all) {
-            viewModel.deleteAll()
-            return true
-        } else {
-            return super.onOptionsItemSelected(item)
+        when (item.itemId) {
+            R.id.delete_all -> {
+                val newFragment = CustomDialogFragment(null,3)
+                newFragment.show(activity!!.supportFragmentManager,"dialog")
+                return true
+            }
+            R.id.delete_id -> {
+                if (dinoAdapter.getDinoId() < 0) {
+                return super.onOptionsItemSelected(item)
+                }
+                val newFragment = CustomDialogFragment(null,2)
+                newFragment.show(activity!!.supportFragmentManager,"dialog")
+                newFragment.setDinoId(dinoAdapter.getDinoId())
+                dinoAdapter.resetItemSelected(true)
+                return true
+            }
+            R.id.edit -> {
+                val newFragment = CustomDialogFragment(null,4)
+                newFragment.show(activity!!.supportFragmentManager,"dialog")
+                if (dinoAdapter.getDino() == null) {
+                    return super.onOptionsItemSelected(item)
+                }
+                newFragment.setDino(dinoAdapter.getDino()!!)
+                dinoAdapter.resetItemSelected(true)
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
         }
     }
-
 }

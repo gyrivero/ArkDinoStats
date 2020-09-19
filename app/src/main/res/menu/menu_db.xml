@@ -3,8 +3,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/delete_all"
-        android:icon="@drawable/ic_baseline_delete_forever_24"
+        android:id="@+id/edit"
+        android:icon="@drawable/ic_baseline_edit_24"
+        android:title="Edit"
+        app:showAsAction="always|collapseActionView" />
+
+    <item
+        android:id="@+id/delete_id"
+        android:icon="@drawable/ic_baseline_delete_24"
         android:title="Delete"
         app:showAsAction="always|collapseActionView" />
+    <item
+        android:id="@+id/delete_all"
+        android:icon="@drawable/ic_baseline_delete_forever_24"
+        android:title="Delete All"
+        app:showAsAction="always|collapseActionView" />
+
 </menu>

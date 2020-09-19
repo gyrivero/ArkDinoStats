@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "dinos")
 class DinoEntity(
     val name: String,
+    val type : String,
     val image: Int,
     val lvl: Int,
     @PrimaryKey(autoGenerate = true) var id: Int? = null,

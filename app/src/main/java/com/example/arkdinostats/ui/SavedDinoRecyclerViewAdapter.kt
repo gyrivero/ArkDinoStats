@@ -9,14 +9,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.arkdinostats.R
 import com.example.arkdinostats.db.entity.DinoEntity
-import org.w3c.dom.Text
+import com.example.arkdinostats.model.Dino
 
 class SavedDinoRecyclerViewAdapter(var context: Context?) :
     RecyclerView.Adapter<SavedDinoRecyclerViewAdapter.ViewHolder>() {
 
     var values = mutableListOf<DinoEntity>()
-    var itemsCopy = ArrayList<DinoEntity>(values)
-    //var fullList = ArrayList<DinoEntity>(values)
+    var itemCheck = false
+    var itemID = -1
+    lateinit var itemView : View
+    var dino: DinoEntity? = null
 
 
     override fun onCreateViewHolder(
@@ -58,6 +60,19 @@ class SavedDinoRecyclerViewAdapter(var context: Context?) :
         holder.dinoDamageTV.text = item.damagePoints.toString()
         holder.dinoWeightTV.text = item.weightPoints.toString()
         holder.dinoWastedTV.text = item.wastedPoints.toString()
+        holder.itemView.setOnClickListener(View.OnClickListener {
+            if (itemCheck && itemID == item.id) {
+                it.setBackgroundColor(context!!.resources.getColor(android.R.color.white,null))
+                itemCheck = false
+                resetItemSelected(false)
+            } else if (!itemCheck) {
+                it.setBackgroundColor(context!!.resources.getColor(R.color.colorAccent,null))
+                itemCheck = true
+                itemView = it
+                itemID = item.id!!
+                dino = item
+            }
+        })
     }
 
     internal fun setDinos(dinos: List<DinoEntity>) {
@@ -65,55 +80,20 @@ class SavedDinoRecyclerViewAdapter(var context: Context?) :
         notifyDataSetChanged()
     }
 
-    fun filter(text: String) {
-        if (text.isEmpty()) {
-            values.clear()
-            values.addAll(itemsCopy)
-        } else {
-            var result = ArrayList<DinoEntity>()
-            var textLower = text.toLowerCase()
-            for (DinoEntity in itemsCopy) {
-                if (DinoEntity.name.contains(textLower)) {
-                    result.add(DinoEntity)
-                }
-            }
-            values.clear()
-            values.addAll(result)
-        }
-        notifyDataSetChanged()
+    internal fun getDinoId(): Int {
+        return this.itemID
     }
 
-    /*override fun getFilter(): Filter {
-        var searchfilter = object : Filter() {
-            override fun performFiltering(constraint: CharSequence?): FilterResults {
-                var filteredList = ArrayList<DinoEntity>()
-                var filteredPattern = constraint.toString().toLowerCase().trim()
-
-                if (constraint.isNullOrEmpty()){
-                    filteredList.addAll(fullList)
-                }
-                else {
-                    for (DinoEntity in fullList) {
-                        if (DinoEntity.name.toLowerCase().contains(filteredPattern)) {
-                            filteredList.add(DinoEntity)
-                        }
-                    }
-                }
-
-                val results = FilterResults()
-                results.values = filteredList
-                return results
-            }
-
-            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                values.clear()
-                if (results != null) {
-                    values.addAll(results.values as Collection<DinoEntity>)
-                }
-                notifyDataSetChanged()
-            }
-
+    internal fun resetItemSelected(itemDeleted : Boolean) {
+        if (itemDeleted) {
+            itemView.setBackgroundColor(context!!.resources.getColor(android.R.color.white,null))
         }
-        return searchfilter
-    }*/
+        itemID = -1
+        itemCheck = false
+        dino = null
+    }
+
+    internal fun getDino() : DinoEntity? {
+        return dino
+    }
 }
