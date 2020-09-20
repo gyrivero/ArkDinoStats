@@ -31,6 +31,7 @@ var pointsTorpidity : Int = 0
 var wastedPoint : Int = 0
 var isValuesOk = false
 var checked = false
+lateinit var menuItem : MenuItem
 
 class CalculatorFragment : Fragment() {
     // TODO: Rename and change types of parameters
@@ -230,6 +231,7 @@ class CalculatorFragment : Fragment() {
             checked = false
         } else {
             checked = true
+            menuItem.setEnabled(true)
         }
 
     }
@@ -482,12 +484,16 @@ class CalculatorFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_calculator,menu)
+        menuItem = menu.findItem(R.id.dino_add)
+        menuItem.setEnabled(false)
     }
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.dino_add && checked) {
             showAddDialog()
+            item.setEnabled(false)
+            checked = false
             return true
         } else {
             return super.onOptionsItemSelected(item)

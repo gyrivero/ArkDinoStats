@@ -6,12 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.cloudfoxgames.jerboapp.R
 import com.cloudfoxgames.jerboapp.db.entity.DinoEntity
 import com.cloudfoxgames.jerboapp.model.Dino
 
-class SavedDinoRecyclerViewAdapter(var context: Context?) :
+class SavedDinoRecyclerViewAdapter(var context: Context?, var fragment: SavedDinosFragment) :
     RecyclerView.Adapter<SavedDinoRecyclerViewAdapter.ViewHolder>() {
 
     var values = mutableListOf<DinoEntity>()
@@ -62,7 +63,7 @@ class SavedDinoRecyclerViewAdapter(var context: Context?) :
         holder.dinoWastedTV.text = item.wastedPoints.toString()
         holder.itemView.setOnClickListener(View.OnClickListener {
             if (itemCheck && itemID == item.id) {
-                it.setBackgroundColor(context!!.resources.getColor(android.R.color.white,null))
+                it.setBackgroundColor(context!!.resources.getColor(R.color.background,null))
                 itemCheck = false
                 resetItemSelected(false)
             } else if (!itemCheck) {
@@ -72,6 +73,7 @@ class SavedDinoRecyclerViewAdapter(var context: Context?) :
                 itemID = item.id!!
                 dino = item
             }
+            fragment.itemChecked(itemCheck)
         })
     }
 
@@ -86,7 +88,7 @@ class SavedDinoRecyclerViewAdapter(var context: Context?) :
 
     internal fun resetItemSelected(itemDeleted : Boolean) {
         if (itemDeleted) {
-            itemView.setBackgroundColor(context!!.resources.getColor(android.R.color.white,null))
+            itemView.setBackgroundColor(context!!.resources.getColor(R.color.background,null))
         }
         itemID = -1
         itemCheck = false

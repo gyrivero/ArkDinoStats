@@ -11,6 +11,8 @@ import com.cloudfoxgames.jerboapp.viewmodel.SavedDinosViewModel
 
 class SavedDinosFragment : Fragment() {
     private lateinit var dinoAdapter: SavedDinoRecyclerViewAdapter
+    lateinit var deleteItem : MenuItem
+    lateinit var editItem : MenuItem
 
     companion object {
         fun newInstance() = SavedDinosFragment()
@@ -32,7 +34,7 @@ class SavedDinosFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_saved_dino_list, container, false)
         setHasOptionsMenu(true)
 
-        dinoAdapter = SavedDinoRecyclerViewAdapter(context)
+        dinoAdapter = SavedDinoRecyclerViewAdapter(context, this)
         loadDinos()
 
         if (view is RecyclerView) {
@@ -41,7 +43,6 @@ class SavedDinosFragment : Fragment() {
                 adapter = dinoAdapter
             }
         }
-
         return view
     }
 
@@ -53,6 +54,20 @@ class SavedDinosFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_db, menu)
+        deleteItem = menu.findItem(R.id.delete_id)
+        editItem = menu.findItem(R.id.edit)
+        deleteItem.setEnabled(false)
+        editItem.setEnabled(false)
+    }
+
+    fun itemChecked(isChecked: Boolean) {
+        if (isChecked) {
+            deleteItem.setEnabled(true)
+            editItem.setEnabled(true)
+        } else {
+            deleteItem.setEnabled(false)
+            editItem.setEnabled(false)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -73,11 +88,11 @@ class SavedDinosFragment : Fragment() {
                 return true
             }
             R.id.edit -> {
-                val newFragment = CustomDialogFragment(null,4)
-                newFragment.show(activity!!.supportFragmentManager,"dialog")
                 if (dinoAdapter.getDino() == null) {
                     return super.onOptionsItemSelected(item)
                 }
+                val newFragment = CustomDialogFragment(null,4)
+                newFragment.show(activity!!.supportFragmentManager,"dialog")
                 newFragment.setDino(dinoAdapter.getDino()!!)
                 dinoAdapter.resetItemSelected(true)
                 return true
