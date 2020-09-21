@@ -41,9 +41,9 @@ class CustomDialogFragment(val bundle: Bundle?, val option: Int) : DialogFragmen
             isCancelable = false
 
             builder.setView(view)
-                .setTitle("Editing name")
-                .setMessage("The actual name is ${dino.name}. Please put a new name.")
-                .setPositiveButton("Yes",
+                .setTitle(getString(R.string.edit_dialog_title))
+                .setMessage(getString(R.string.part1_edit_dialog_message) + dino.name + getString(R.string.part2_edit_dialog_message))
+                .setPositiveButton(R.string.yes,
                     DialogInterface.OnClickListener { dialog, id ->
                         val dinoName : String
                         if (view.dinoNameET.text.isNullOrEmpty()) {
@@ -55,7 +55,7 @@ class CustomDialogFragment(val bundle: Bundle?, val option: Int) : DialogFragmen
                             viewModel.update(newDino)
                         }
                     })
-                .setNegativeButton("No",
+                .setNegativeButton(R.string.no,
                     DialogInterface.OnClickListener { dialog, id ->
                         getDialog()?.cancel()
                     })
@@ -68,12 +68,12 @@ class CustomDialogFragment(val bundle: Bundle?, val option: Int) : DialogFragmen
             // Use the Builder class for convenient dialog construction
             val builder = AlertDialog.Builder(it)
             isCancelable = false
-            builder.setMessage("You are going to delete all dinos. Are you sure?")
-                .setPositiveButton("Yes",
+            builder.setMessage(getString(R.string.delete_all_dialog_message))
+                .setPositiveButton(R.string.yes,
                     DialogInterface.OnClickListener { dialog, id ->
                         viewModel.deleteAll()
                     })
-                .setNegativeButton("No",
+                .setNegativeButton(R.string.no,
                     DialogInterface.OnClickListener { dialog, id ->
                         dialog.cancel()
                     })
@@ -86,13 +86,13 @@ class CustomDialogFragment(val bundle: Bundle?, val option: Int) : DialogFragmen
             // Use the Builder class for convenient dialog construction
             val builder = AlertDialog.Builder(it)
             isCancelable = false
-            builder.setMessage("You are going to delete this dino. Are you sure?")
+            builder.setMessage(getString(R.string.delete_dialog_message))
                 .setCancelable(false)
-                .setPositiveButton("Yes",
+                .setPositiveButton(getString(R.string.yes),
                     DialogInterface.OnClickListener { dialog, id ->
                         viewModel.deleteById(dinoId)
                     })
-                .setNegativeButton("No",
+                .setNegativeButton(getString(R.string.no),
                     DialogInterface.OnClickListener { dialog, id ->
                         dialog.cancel()
                     })
@@ -112,7 +112,7 @@ class CustomDialogFragment(val bundle: Bundle?, val option: Int) : DialogFragmen
             builder.setView(view)
                 .setTitle(R.string.adding)
                 .setMessage(R.string.add_dialog_message)
-                .setPositiveButton("Yes",
+                .setPositiveButton(R.string.yes,
                     DialogInterface.OnClickListener { dialog, id ->
                         val dinoName : String
                         if (view.dinoNameET.text.isNullOrEmpty()) {
@@ -125,7 +125,7 @@ class CustomDialogFragment(val bundle: Bundle?, val option: Int) : DialogFragmen
                         intent.putExtra("dino", bundle)
                         startActivity(intent)
                     })
-                .setNegativeButton("No",
+                .setNegativeButton(R.string.no,
                     DialogInterface.OnClickListener { dialog, id ->
                         getDialog()?.cancel()
                     })

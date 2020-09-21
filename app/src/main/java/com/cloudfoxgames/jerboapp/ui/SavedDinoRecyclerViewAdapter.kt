@@ -93,6 +93,7 @@ class SavedDinoRecyclerViewAdapter(var context: Context?, var fragment: SavedDin
         itemID = -1
         itemCheck = false
         dino = null
+        fragment.itemChecked(itemCheck)
     }
 
     internal fun getDino() : DinoEntity? {
