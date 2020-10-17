@@ -39,7 +39,7 @@
             android:layout_marginStart="22dp"
             android:layout_marginTop="24dp"
             android:text="@string/health"
-            android:textSize="30sp"
+            android:textSize="27sp"
             app:layout_constraintBottom_toTopOf="@+id/staminaTV"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline2"
@@ -52,7 +52,7 @@
             android:layout_marginStart="22dp"
             android:layout_marginTop="24dp"
             android:text="@string/stamina"
-            android:textSize="30sp"
+            android:textSize="27sp"
             app:layout_constraintBottom_toTopOf="@+id/oxygenTV"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/hpTV" />
@@ -64,7 +64,7 @@
             android:layout_marginStart="22dp"
             android:layout_marginTop="24dp"
             android:text="@string/oxygen"
-            android:textSize="30sp"
+            android:textSize="27sp"
             app:layout_constraintBottom_toTopOf="@+id/foodTV"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/staminaTV" />
@@ -76,7 +76,7 @@
             android:layout_marginStart="22dp"
             android:layout_marginTop="24dp"
             android:text="@string/food"
-            android:textSize="30sp"
+            android:textSize="27sp"
             app:layout_constraintBottom_toTopOf="@+id/weightTV"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/oxygenTV" />
@@ -88,7 +88,7 @@
             android:layout_marginStart="22dp"
             android:layout_marginTop="24dp"
             android:text="@string/weight"
-            android:textSize="30sp"
+            android:textSize="27sp"
             app:layout_constraintBottom_toTopOf="@+id/damageTV"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/foodTV" />
@@ -100,7 +100,7 @@
             android:layout_marginStart="22dp"
             android:layout_marginTop="24dp"
             android:text="@string/damage"
-            android:textSize="30sp"
+            android:textSize="27sp"
             app:layout_constraintBottom_toTopOf="@+id/speedTV"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/weightTV" />
@@ -112,7 +112,7 @@
             android:layout_marginStart="22dp"
             android:layout_marginTop="24dp"
             android:text="@string/speed"
-            android:textSize="30sp"
+            android:textSize="27sp"
             app:layout_constraintBottom_toTopOf="@+id/torpidityTV"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/damageTV" />
@@ -124,7 +124,7 @@
             android:layout_marginStart="22dp"
             android:layout_marginTop="24dp"
             android:text="@string/torpidity"
-            android:textSize="30sp"
+            android:textSize="27sp"
             app:layout_constraintBottom_toTopOf="@+id/wastedTV"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/speedTV" />
@@ -136,7 +136,7 @@
             android:layout_marginStart="22dp"
             android:layout_marginTop="24dp"
             android:text="@string/wasted"
-            android:textSize="30sp"
+            android:textSize="27sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/torpidityTV" />
@@ -378,7 +378,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="232dp" />
+            app:layout_constraintGuide_begin="246dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"

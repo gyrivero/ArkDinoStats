@@ -368,7 +368,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="139dp" />
+            app:layout_constraintGuide_begin="168dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"
@@ -392,8 +392,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/checkBtn"
             android:backgroundTint="@color/button"
+            android:text="@string/checkBtn"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@+id/averageTV"
             app:layout_constraintTop_toBottomOf="@+id/averageTV" />
