@@ -25,6 +25,7 @@ class DinoFragment : Fragment()  {
     private lateinit var dinoAdapter : DinoRecyclerViewAdapter
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

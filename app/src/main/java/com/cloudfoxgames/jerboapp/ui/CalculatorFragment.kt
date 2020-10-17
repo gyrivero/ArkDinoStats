@@ -47,7 +47,8 @@ class CalculatorFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
 
             mInterstitialAd = InterstitialAd(activity)
-            mInterstitialAd.adUnitId = "ca-app-pub-3829761967318508/6486275931"
+            //mInterstitialAd.adUnitId = "ca-app-pub-3829761967318508/6486275931"
+            mInterstitialAd.adUnitId = "ca-app-pub-3940256099942544/1033173712"
             mInterstitialAd.loadAd(AdRequest.Builder().build())
             mInterstitialAd.adListener = object : AdListener() {
                 override fun onAdClosed() {
@@ -116,8 +117,6 @@ class CalculatorFragment : Fragment() {
                 checkStats()
                 if (mInterstitialAd.isLoaded) {
                     mInterstitialAd.show()
-                } else {
-                    Toast.makeText(activity, "Doesn't loaded", Toast.LENGTH_SHORT).show()
                 }
             }
         })
