@@ -393,7 +393,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="@string/average_0"
-            android:textSize="37sp"
+            android:textSize="34sp"
             app:layout_constraintStart_toStartOf="@+id/imprintET"
             app:layout_constraintTop_toBottomOf="@+id/imprintET" />
 
